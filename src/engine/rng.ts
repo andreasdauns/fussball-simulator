@@ -47,7 +47,7 @@ function fmix32(h: number): number {
 }
 
 function toUint32(seed: number): number {
-  if (Number.isInteger(seed) && Math.abs(seed) < 2 ** 53) {
+  if (Number.isInteger(seed) && Math.abs(seed) <= Number.MAX_SAFE_INTEGER) {
     const m = seed % 4294967296;
     return (m < 0 ? m + 4294967296 : m) >>> 0;
   }

@@ -110,7 +110,7 @@ export function positionLine(pos: Position): Line {
 export function eff(p: Player, key: AttrKey, fatigue: number): number {
   const base = p.attributes[key];
   const physical = key === 'pace' || key === 'acceleration' || key === 'stamina' || key === 'workRate';
-  const k = physical ? 0.2 : key.startsWith('gk') ? 0.03 : 0.1;
+  const k = physical ? 0.3 : key.startsWith('gk') ? 0.03 : 0.1;
   return base * (1 - k * fatigue);
 }
 
@@ -200,6 +200,11 @@ export function aerialScore(p: Player, fatigue: number): number {
   return 0.55 * eff(p, 'heading', fatigue) + 0.3 * eff(p, 'strength', fatigue) + 0.15 * eff(p, 'positioning', fatigue) + heightBonus(p);
 }
 
+function topMean(xs: number[], k: number): number {
+  const s = [...xs].sort((a, b) => b - a).slice(0, k);
+  return s.reduce((a, b) => a + b, 0) / s.length;
+}
+
 export function computeStrength(slots: SlotInfo[], tac: Tactic): TeamStrength {
   const att = [0, 1, 2].map(() => [0, 0, 0]);
   const def = [0, 1, 2].map(() => [0, 0, 0]);
@@ -209,12 +214,12 @@ export function computeStrength(slots: SlotInfo[], tac: Tactic): TeamStrength {
   let buildN = 0;
   let aerA = 0;
   let aerAN = 0;
-  let aerD = 0;
-  let aerDN = 0;
+  const aerDs: number[] = [];
   let gk = 45;
   let sumA = 0;
   let sumD = 0;
   let setPiece = 60;
+  let fatSum = 0;
   const takers = new Set([...tac.cornerTakers, ...tac.freeKickTakers]);
 
   for (const s of slots) {
@@ -238,6 +243,7 @@ export function computeStrength(slots: SlotInfo[], tac: Tactic): TeamStrength {
       }
     }
     const p = s.player;
+    fatSum += s.fatigue;
     if (line !== 'def') {
       press += (0.4 * eff(p, 'workRate', s.fatigue) + 0.3 * eff(p, 'stamina', s.fatigue) + 0.3 * eff(p, 'pace', s.fatigue)) / 100;
       pressN++;
@@ -252,8 +258,7 @@ export function computeStrength(slots: SlotInfo[], tac: Tactic): TeamStrength {
       aerAN += line === 'att' ? 1.3 : 0.7;
     }
     if (line === 'def' || s.slot.role === 'holding-mid') {
-      aerD += aer;
-      aerDN++;
+      aerDs.push(aer);
     }
     if (takers.has(p.id)) setPiece = Math.max(setPiece, 0.7 * eff(p, 'crossing', s.fatigue) + 0.3 * eff(p, 'longPassing', s.fatigue));
   }
@@ -261,10 +266,12 @@ export function computeStrength(slots: SlotInfo[], tac: Tactic): TeamStrength {
   return {
     att,
     def,
-    pressPower: pressN ? press / pressN : 0.5,
+    // Müde Mannschaften können das Pressing nicht mehr durchhalten
+    pressPower: (pressN ? press / pressN : 0.5) * (1 - 0.7 * (fatSum / n)),
     buildUp: buildN ? build / buildN : 60,
     aerialAtt: aerAN ? aerA / aerAN : 60,
-    aerialDef: aerDN ? aerD / aerDN : 60,
+    // Die drei kopfballstärksten Abwehrspieler verteidigen den Strafraum in der Luft
+    aerialDef: aerDs.length ? topMean(aerDs, 3) : 60,
     setPiece,
     gk,
     avgAttack: sumA / n,
@@ -281,6 +288,6 @@ export function fatigueRate(p: Player, slot: LineupSlot, tac: Tactic): number {
   const stamina = p.attributes.stamina;
   const line = roleLine(slot.role);
   const pressShare = line === 'def' ? 0.4 : 1;
-  const press = 1 + 0.9 * tac.pressingIntensity * pressShare * (0.6 + 0.4 * tac.pressingHeight) + 0.25 * tac.tempo;
-  return 0.0058 * (1.55 - stamina / 100) * (0.75 + 0.5 * (p.attributes.workRate / 100)) * press;
+  const press = 1 + 1.1 * tac.pressingIntensity * pressShare * (0.6 + 0.4 * tac.pressingHeight) + 0.25 * tac.tempo;
+  return 0.0042 * (1.55 - stamina / 100) * (0.75 + 0.5 * (p.attributes.workRate / 100)) * press;
 }

@@ -51,9 +51,6 @@ export function ratingPoints(r: RatingInput, score: { home: number; away: number
   return pts;
 }
 
-/** Nur für Kalibrierung: sammelt Rohpunkte */
-export const ratingDebug: { sink: { line: Line; pts: number; minutes: number }[] | null } = { sink: null };
-
 export function computeRatings(players: RatingInput[], score: { home: number; away: number }): void {
   for (const r of players) {
     const s = r.stats;
@@ -62,7 +59,6 @@ export function computeRatings(players: RatingInput[], score: { home: number; aw
       continue;
     }
     const pts = ratingPoints(r, score);
-    if (ratingDebug.sink) ratingDebug.sink.push({ line: r.line, pts, minutes: s.minutes });
     const z = (pts - LINE_MEAN[r.line]) / LINE_SD[r.line];
     // Kurzeinsätze ziehen Richtung 3.5
     const weight = clamp(s.minutes / 60, 0.25, 1);

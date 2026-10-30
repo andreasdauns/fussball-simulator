@@ -34,7 +34,7 @@ import {
   type Line,
   type TeamStrength,
 } from './strength';
-import { clamp, dist, distToGoal, goalAngle, inBox, logistic, logit, r2, softsign, PITCH_LENGTH, PITCH_WIDTH } from './math';
+import { clamp, dist, distToGoal, goalAngle, inBox, logistic, logit, r2, PITCH_LENGTH, PITCH_WIDTH } from './math';
 import { foulFactor, redPerFoul, yellowPerFoul } from './rules';
 import { ENGINE_VERSION } from './version';
 import { computeMomentum, computeRatings } from './postmatch';
@@ -52,12 +52,12 @@ export const P = {
   passDist: 24,
   passZone: 1.1,
   longBase: 0.9,
-  crossBase: -1.0,
+  crossBase: -0.75,
   carryFail: 0.07,
   foulPerStep: 0.0105,
   foulOnFailedDribble: 0.32,
   shotWeight: 0.55,
-  xgBase: -1.45,
+  xgBase: -1.1,
   xgDist: 0.11,
   xgAngle: 1.5,
   holdMin: 3.0,
@@ -596,7 +596,7 @@ class MatchSim {
 
     // Foul im Zweikampf (vor der Aktion)
     const ff = foulFactor(B.sheet.era) * (0.55 + 0.7 * press) * (1 + 0.7 * B.tac.manMarking) * (bT.x > 70 ? 1.15 : 1) * (this.flags.counter > 0 ? 1.8 : 1);
-    const boxF = inBox(bT) ? 0.05 : 1; // im Strafraum wird vorsichtiger verteidigt
+    const boxF = inBox(bT) ? 0.025 : 1; // im Strafraum wird vorsichtiger verteidigt
     if (c.slot.role !== 'goalkeeper' && this.rRef.chance(P.foulPerStep * ff * boxF)) {
       this.foul(B, nearestDef, A, c, this.ball, this.flags.counter > 0);
       return;
@@ -623,7 +623,6 @@ class MatchSim {
     const counter = this.flags.counter > 0;
     const directness = clamp(tac.directness + (counter ? 0.35 : 0), 0, 1);
     const d = distToGoal(bT);
-    const ang = goalAngle(bT);
     const wide = Math.abs(bT.y - 34) > 15;
 
     // Aktionsgewichte
@@ -640,8 +639,10 @@ class MatchSim {
     if (isGk) wLong = 1 + 3 * directness + 2 * B.tac.pressingHeight * B.tac.pressingIntensity;
     if (bT.x < 20 && press > 0.75) wLong += 1.2 * (1 - A.str.buildUp / 100);
     let wCross = 0;
-    if (!isGk && bT.x > 66 && wide) wCross = 2.4 * (0.35 + tac.crossingFocus) * (0.5 + this.a(c, 'crossing') / 140);
-    else if (!isGk && bT.x > 78 && Math.abs(bT.y - 34) > 9) wCross = 0.6 * (0.3 + tac.crossingFocus);
+    const wideRole = c.slot.role === 'wing-back' || c.slot.role === 'wide-mid' || c.slot.role === 'full-back';
+    const crossFrom = wideRole ? 60 : 66;
+    if (!isGk && bT.x > crossFrom && wide) wCross = 1.3 * clamp(4 * tac.crossingFocus - 1.2, 0.15, 2) * (0.5 + this.a(c, 'crossing') / 140) * (wideRole ? 1.15 : c.slot.role === 'inside-forward' ? 0.5 : 1);
+    else if (!isGk && bT.x > 78 && Math.abs(bT.y - 34) > 9) wCross = 0.35 * clamp(4 * tac.crossingFocus - 1.2, 0.15, 2);
     let wCarry = isGk ? 0 : 0.45 + 0.6 * (1 - Math.min(1, press)) + (counter ? 1.5 : 0);
     let wDrib = 0;
     if (!isGk) {
@@ -707,6 +708,8 @@ class MatchSim {
         w = (1 / (1 + z * z)) * clamp(1 + (fwdBias * fwd) / 18, 0.25, 2.6);
         if (isGk) w *= 0.25;
       }
+      // Flügelspiel: breite Spieler werden bei Flankenfokus bevorzugt angespielt
+      if (!long && bT.x > 35 && Math.abs(p.y - 34) > 18) w *= 0.8 + 0.5 * A.tac.crossingFocus * (0.4 + A.tac.width);
       let open = 99;
       for (const q of oppPos) open = Math.min(open, dist(q, p));
       w *= 0.35 + clamp(open / 7, 0, 1.2);
@@ -883,7 +886,7 @@ class MatchSim {
     this.emit('dribble', A.side, { player: c, other: def, from: this.ball, to: midAbs, duration: dur, success: false, height: 'ground' });
     this.onBall(A.side, dur);
     c.duelsLost++;
-    const pf = (inBox(bT) ? 0.12 : 1) * P.foulOnFailedDribble * foulFactor(B.sheet.era) * (1 + 0.8 * B.tac.manMarking) * (1.2 - this.a(def, 'tackling') / 200);
+    const pf = (inBox(midT) ? 0.055 : 1) * P.foulOnFailedDribble * foulFactor(B.sheet.era) * (1 + 0.8 * B.tac.manMarking) * (1.2 - this.a(def, 'tackling') / 200);
     if (this.rRef.chance(pf)) {
       this.foul(B, def, A, c, midAbs, this.flags.counter > 0 || bT.x > 70);
       return;
@@ -895,6 +898,15 @@ class MatchSim {
     def.stats.tackles++;
     def.duelsWon++;
     const touchDist = Math.min(atAbs.y, PITCH_WIDTH - atAbs.y);
+    const vT = tc(victim.side, atAbs);
+    if (vT.x > 84 && this.rng.chance(0.06)) {
+      // Abwehrspieler grätscht den Ball über die eigene Torlinie → Ecke
+      const outT: Vec2 = { x: 105, y: clamp(vT.y + (vT.y < 34 ? -6 : 6), 1, 67) };
+      const outAbs = tc(victim.side, outT);
+      this.emit('tackle', B.side, { player: def, other: victim, from: atAbs, to: outAbs, duration: 0.3 + dist(atAbs, outAbs) / 12, success: true });
+      this.restart = { kind: 'corner', side: victim.side, spot: tc(victim.side, { x: 105, y: vT.y < 34 ? 0 : 68 }), dead: this.rTime.range(18, 30) };
+      return;
+    }
     const pOut = touchDist < 14 ? 0.5 : 0.18;
     if (this.rng.chance(pOut)) {
       // Ball springt ins Aus
@@ -958,7 +970,7 @@ class MatchSim {
       return;
     }
     const defender = this.nearest(B, tc(B.side, toAbs), tc(B.side, toAbs), false);
-    this.clearance(A, B, defender, toAbs, 0.33);
+    this.clearance(A, B, defender, toAbs, 0.38);
   }
 
   private teamDefAvg(B: TS): number {
@@ -989,6 +1001,7 @@ class MatchSim {
     const landB: Vec2 = { x: this.rng.range(25, 50), y: this.rng.range(4, 64) };
     const landAbs = tc(B.side, landB);
     const outTouch = this.rng.chance(0.15);
+    // Klärung ins Toraus (Ecke) auch aus dem Spiel heraus
     const to = outTouch ? { x: landAbs.x, y: landAbs.y < 34 ? 0 : 68 } : landAbs;
     const dur = dist(atAbs, to) / this.rTime.range(18, 24);
     this.emit('clearance', B.side, { player: def, from: atAbs, to, duration: dur, success: true, height: 'high' });
@@ -1056,7 +1069,6 @@ class MatchSim {
       if (v < 0.4) {
         const by = tc(A.side, { x: 105, y: clamp(blT.y + this.rng.range(-10, 10), 2, 66) });
         this.emit('block', B.side, { player: blocker, other: s, from: blAbs, to: by, duration: 0.3 + dist(blAbs, by) / 16, success: true, text: big });
-        A.s.corners++;
         this.restart = { kind: 'corner', side: A.side, spot: tc(A.side, { x: 105, y: blT.y < 34 ? 0 : 68 }), dead: this.rTime.range(18, 30) };
       } else {
         const landT: Vec2 = inside({ x: blT.x - this.rng.range(6, 18), y: blT.y + this.rng.range(-10, 10) }, 1);
@@ -1114,7 +1126,6 @@ class MatchSim {
       } else if (w < holdP + (1 - holdP) * 0.5) {
         const by = tc(A.side, { x: 105, y: svT.y < 34 ? this.rng.range(20, 30) : this.rng.range(38, 48) });
         this.emit('save', B.side, { player: gk, other: s, from: svAbs, to: by, duration: 0.3 + dist(svAbs, by) / 15, success: true, text });
-        A.s.corners++;
         this.restart = { kind: 'corner', side: A.side, spot: tc(A.side, { x: 105, y: svT.y < 34 ? 0 : 68 }), dead: this.rTime.range(18, 30) };
       } else {
         const landT: Vec2 = { x: this.rng.range(92, 99), y: this.rng.range(24, 44) };
@@ -1278,7 +1289,6 @@ class MatchSim {
         return;
       }
       case 'corner': {
-        A.s.corners += 0; // Ecken werden beim Entstehen gezählt
         const taker = this.setPieceTaker(A, A.tac.cornerTakers, 'crossing');
         this.carrier = taker;
         if (this.rng.chance(0.15)) {
@@ -1599,6 +1609,3 @@ class MatchSim {
 export function simulateMatch(home: TeamSheet, away: TeamSheet, seed: number, options: SimulateOptions = {}): MatchResult {
   return new MatchSim(home, away, seed, options).run();
 }
-
-// interne Helfer für Tests
-export const _internal = { tc, softsign };

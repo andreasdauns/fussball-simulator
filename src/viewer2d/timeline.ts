@@ -182,6 +182,19 @@ export class MatchTimeline {
     return this.events[i]!.ev.score;
   }
 
+  /** Engine-Zeit t zu einem τ (für result.momentum, das nach t/60 indiziert ist). */
+  engineT(tau: number): number {
+    if (!this.hasSecondHalf || tau < this.halfTimeTau) return tau;
+    if (tau < this.h2StartTau) return this.halfTimeTau;
+    return tau - this.h2Offset;
+  }
+
+  /** Umkehrung von engineT */
+  tauOfEngineT(t: number): number {
+    if (!this.hasSecondHalf || t < this.halfTimeTau) return t;
+    return t + this.h2Offset;
+  }
+
   /** Spielminute (0-basiert) für den Momentum-Graphen. */
   minuteAt(tau: number): number {
     if (tau < this.halfTimeTau || !this.hasSecondHalf) return Math.max(0, Math.floor((tau - this.h1StartT) / 60));

@@ -190,7 +190,7 @@ export function sweeperTeam(opts: { era?: number; delta?: number; id?: string } 
     shortName: 'Libero',
     season: '2000/01',
     era: opts.era ?? 2001,
-    delta: opts.delta ?? 0,
+    delta: opts.delta ?? -2, // Profile (Libero, Schienenspieler) sind etwas höher, so gleich stark wie pressTeam
     tactic: {
       formation: '3-5-2',
       pressingHeight: 0.3,
@@ -225,7 +225,7 @@ export function sweeperTeam(opts: { era?: number; delta?: number; id?: string } 
   });
 }
 
-/** 4-4-2, klar schwächer (alle Werte −4) */
+/** 4-4-2, klar schwächer (alle Werte −5) */
 export function weakTeam(opts: { era?: number; delta?: number; id?: string } = {}): TeamSheet {
   return buildTeam({
     id: opts.id ?? 'test-weak',
@@ -233,7 +233,7 @@ export function weakTeam(opts: { era?: number; delta?: number; id?: string } = {
     shortName: 'Schwach',
     season: '2019/20',
     era: opts.era ?? 2020,
-    delta: opts.delta ?? -4,
+    delta: opts.delta ?? -5,
     tactic: {
       formation: '4-4-2',
       pressingHeight: 0.4,
