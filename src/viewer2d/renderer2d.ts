@@ -204,7 +204,7 @@ export class PitchRenderer {
     if (this.trail.length > 14) this.trail.shift();
 
     // Spieler-Schatten
-    const r = Math.max(5, 0.95 * s);
+    const r = Math.max(6, 1.2 * s);
     for (const p of frame.players) {
       const [x, y] = this.P(p.x, p.y);
       g.beginPath();
@@ -229,7 +229,7 @@ export class PitchRenderer {
     }
 
     // Spieler
-    const fontPx = Math.max(7, r * 1.05);
+    const fontPx = Math.max(8, r * 1.1);
     g.textAlign = 'center';
     g.textBaseline = 'middle';
     for (const p of frame.players) {

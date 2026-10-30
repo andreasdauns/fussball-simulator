@@ -6,3 +6,4 @@ _raw/
 data/_raw/
 .env
 .env.*
+dist-single/

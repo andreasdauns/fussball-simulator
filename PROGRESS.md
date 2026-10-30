@@ -62,3 +62,27 @@ Testteams in `tests/fixtures/teams.ts` (frei erfunden): Pressing 4-2-3-1 (2020),
 - Doppelte Unterzahl, Verletzungen, Elfmeterschießen und Verlängerung fehlen.
 - Die Spielnoten-Normierung (`LINE_MEAN`/`LINE_SD` in `postmatch.ts`) ist auf die Testteams kalibriert. Bei echten Teams nachprüfen.
 - Die Testteams sind synthetisch. Die Kalibrierung muss mit den echten Bayern-2001/2020-Datensätzen wiederholt werden.
+
+## 30.10.2026 – F02: 2D-Testansicht mit TV-Einblendungen (Viewer)
+
+### Umfang
+- `src/viewer2d/timeline.ts`: Wiedergabe-Zeitachse τ (2. Halbzeit lückenlos mit 8 s Pause angehängt), Uhr mit Nachspielzeit, Spielstand, Umrechnung τ ↔ Engine-Zeit (für `momentum`).
+- `src/viewer2d/positions.ts`: Positions-Synthese. Ball rein aus den Ereignissen (Interpolation `from`→`to`, Bogen bei `mid`/`high`, rollender Ball bremst). 22 Spieler werden in 10-Hz-Schritten vorwärts simuliert (Höchsttempo nach `pace` 5,6–8,4 m/s, Beschleunigung 4,2 m/s²). Schnappschuss alle 5 s, damit Spulen schnell geht; Ergebnis ist unabhängig von Abfragereihenfolge. Ziele: Anker (Angriff/Abwehr je nach geglättetem Ballbesitz) + Verschiebung zum Ball, Kompaktheit über `defensiveLine`/`pressingIntensity`/`width`, Abseitslinie, Pressing der nächsten Verteidiger (Anzahl nach `pressingHeight`/`pressingIntensity`), Passempfänger läuft zum Zielpunkt, Ballführender am Ball. Standards: Anstoßformation, Ecke (Kopfballstarke in den Strafraum, Raumdeckung), gefährlicher Freistoß (Mauer 9,15 m), sonst 9,15 m Abstand, Elfmeter, Abstoß. Torjubel. Wechsel (Ein-/Auslaufen über die Seitenlinie), Rote Karte (Spieler geht). Seitenwechsel: nur Anzeige gespiegelt; zur 2. HZ stehen alle direkt in Anstoßformation (Bildschnitt).
+- `src/viewer2d/renderer2d.ts`: Canvas-Draufsicht (Mähstreifen, korrekte Linien, Tore mit Netz, Spieler mit Nummern, TW in `gkPrimary`, Ball mit Schatten/Höhe/Spur, Ring + Namensschild am Ballführenden). DPR-bewusst, dreht im Hochformat auf 90°.
+- `src/viewer2d/highlights.ts`: Highlight-Fenster (Tor, Rot, Elfmeter, Parade, Schuss ab xG 0,12; 10 s Vorlauf, überlappende zusammengelegt), Halbzeit-Statistik aus Ereignissen, Torliste.
+- `src/viewer2d/demoTeams.ts`: zwei fiktive Demo-Teams („Rot 4-2-3-1“, „Weiß 3-5-2“), solange `src/data/teams/` leer ist.
+- `src/ui/*`: Anzeigetafel, Bauchbinden (Tor/Karte/Wechsel), Aufstellungstafel mit Trainer, Halbzeit-/Abpfiff-Statistik mit Torliste, Momentum-Graph als Spulleiste mit Tormarken, Live-Ticker, Steuerung (Play/Pause, 1×–32×, Highlights, Neustart, Spiel-Nr., Zufall). Trikotkonflikt (z. B. Bayern gegen Bayern) → Gast in Zweitfarben (`kits.ts`). Mannschaften per `import.meta.glob('../data/teams/*.json')`. URL-Hash `#h=…&a=…&s=…` merkt Spiel.
+- `src/main.ts` nutzt die echte Engine (`simulateMatch` aus `src/engine`); kein Stub nötig.
+- Tests `tests/viewer-positions.test.ts` (15): Determinismus, Feldgrenzen ±3 m, 10–11 Spieler je Team, Ball = `from`/`to` an Ereignisgrenzen, Seitenwechsel, Tempo-Plausibilität, Highlights, Wechsel, Rot, Anstoßformation – jeweils mit synthetischem Spiel und echter Engine.
+
+### Messwerte
+- Vorberechnung eines ganzen Spiels: ≈ 0,6 s in Node (läuft im Browser schrittweise im Hintergrund).
+- Ballführender im Mittel ≈ 1,3 m vom Ball, Passempfänger bei Ankunft ≈ 2,4 m.
+- `dist-single/index.html` ≈ 112 kB (38 kB gzip).
+
+### Bekannte Schwächen
+- Laufwege sind regelbasiert, nicht taktisch „intelligent“; bei sehr schnellen Ballwechseln laufen Spieler dem Ball teils hinterher (Ballführender bis 1,3× Höchsttempo).
+- Mehrere Ereignisse zum selben Zeitpunkt (Foul → Karte) überlappen; der Ball springt dann zum letzten.
+- Highlight-Modus springt hart (kein Überblenden).
+- Google-Font (Barlow Condensed) braucht Internet; offline greift eine Systemschrift.
+- Optik nur per Screenshot geprüft – Andreas' Rückmeldung zum TV-Gefühl fehlt noch.
