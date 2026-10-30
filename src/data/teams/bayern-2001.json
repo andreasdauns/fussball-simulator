@@ -1,0 +1,1282 @@
+{
+  "id": "bayern-2001",
+  "name": "FC Bayern München 2000/01",
+  "shortName": "Bayern 01",
+  "season": "2000/01",
+  "era": 2001,
+  "colors": {
+    "primary": "#c3c7cc",
+    "secondary": "#1d2b4f",
+    "numbers": "#1d2b4f",
+    "gkPrimary": "#7cc4ec"
+  },
+  "coach": {
+    "name": "Ottmar Hitzfeld",
+    "firstSubMinute": 58,
+    "aggressionWhenTrailing": 0.75,
+    "cautionWhenLeading": 0.6,
+    "maxSubs": 3
+  },
+  "tactic": {
+    "formation": "3-4-2-1",
+    "pressingHeight": 0.35,
+    "pressingIntensity": 0.45,
+    "defensiveLine": 0.35,
+    "width": 0.65,
+    "directness": 0.55,
+    "tempo": 0.5,
+    "crossingFocus": 0.6,
+    "counterAttack": 0.65,
+    "manMarking": 0.8,
+    "offsideTrap": 0.2,
+    "gameManagement": 0.65,
+    "freeKickTakers": [
+      "stefan-effenberg",
+      "mehmet-scholl",
+      "michael-tarnat"
+    ],
+    "cornerTakers": [
+      "stefan-effenberg",
+      "mehmet-scholl"
+    ],
+    "penaltyTakers": [
+      "stefan-effenberg",
+      "mehmet-scholl"
+    ],
+    "captain": "stefan-effenberg"
+  },
+  "lineup": [
+    {
+      "playerId": "oliver-kahn",
+      "position": "GK",
+      "role": "goalkeeper",
+      "anchorAttack": {
+        "x": 8,
+        "y": 34
+      },
+      "anchorDefend": {
+        "x": 5,
+        "y": 34
+      }
+    },
+    {
+      "playerId": "samuel-kuffour",
+      "position": "CB",
+      "role": "stopper",
+      "anchorAttack": {
+        "x": 30,
+        "y": 47
+      },
+      "anchorDefend": {
+        "x": 16,
+        "y": 45
+      }
+    },
+    {
+      "playerId": "patrik-andersson",
+      "position": "SW",
+      "role": "sweeper",
+      "anchorAttack": {
+        "x": 26,
+        "y": 34
+      },
+      "anchorDefend": {
+        "x": 13,
+        "y": 34
+      }
+    },
+    {
+      "playerId": "thomas-linke",
+      "position": "CB",
+      "role": "stopper",
+      "anchorAttack": {
+        "x": 30,
+        "y": 21
+      },
+      "anchorDefend": {
+        "x": 16,
+        "y": 23
+      }
+    },
+    {
+      "playerId": "willy-sagnol",
+      "position": "RWB",
+      "role": "wing-back",
+      "anchorAttack": {
+        "x": 62,
+        "y": 62
+      },
+      "anchorDefend": {
+        "x": 21,
+        "y": 60
+      }
+    },
+    {
+      "playerId": "owen-hargreaves",
+      "position": "DM",
+      "role": "holding-mid",
+      "anchorAttack": {
+        "x": 44,
+        "y": 40
+      },
+      "anchorDefend": {
+        "x": 30,
+        "y": 38
+      }
+    },
+    {
+      "playerId": "stefan-effenberg",
+      "position": "CM",
+      "role": "deep-playmaker",
+      "anchorAttack": {
+        "x": 52,
+        "y": 28
+      },
+      "anchorDefend": {
+        "x": 34,
+        "y": 30
+      }
+    },
+    {
+      "playerId": "bixente-lizarazu",
+      "position": "LWB",
+      "role": "wing-back",
+      "anchorAttack": {
+        "x": 62,
+        "y": 6
+      },
+      "anchorDefend": {
+        "x": 21,
+        "y": 8
+      }
+    },
+    {
+      "playerId": "hasan-salihamidzic",
+      "position": "RM",
+      "role": "wide-mid",
+      "anchorAttack": {
+        "x": 73,
+        "y": 50
+      },
+      "anchorDefend": {
+        "x": 47,
+        "y": 50
+      }
+    },
+    {
+      "playerId": "mehmet-scholl",
+      "position": "AM",
+      "role": "advanced-playmaker",
+      "anchorAttack": {
+        "x": 73,
+        "y": 24
+      },
+      "anchorDefend": {
+        "x": 48,
+        "y": 24
+      }
+    },
+    {
+      "playerId": "giovane-elber",
+      "position": "ST",
+      "role": "complete-forward",
+      "anchorAttack": {
+        "x": 90,
+        "y": 34
+      },
+      "anchorDefend": {
+        "x": 58,
+        "y": 34
+      }
+    }
+  ],
+  "bench": [
+    {
+      "id": "bernd-dreher",
+      "name": "Bernd Dreher",
+      "shortName": "Dreher",
+      "number": 22,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 187,
+      "overall": 64,
+      "attributes": {
+        "pace": 35,
+        "acceleration": 35,
+        "stamina": 35,
+        "strength": 35,
+        "firstTouch": 35,
+        "dribbling": 35,
+        "shortPassing": 35,
+        "longPassing": 35,
+        "crossing": 35,
+        "finishing": 35,
+        "longShots": 35,
+        "heading": 35,
+        "tackling": 35,
+        "marking": 35,
+        "positioning": 35,
+        "vision": 35,
+        "composure": 35,
+        "workRate": 35,
+        "gkReflexes": 64,
+        "gkHandling": 64,
+        "gkPositioning": 64,
+        "gkDistribution": 64
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)"
+      ]
+    },
+    {
+      "id": "michael-tarnat",
+      "name": "Michael Tarnat",
+      "shortName": "Tarnat",
+      "number": 18,
+      "positions": [
+        "LB",
+        "LWB",
+        "DM"
+      ],
+      "foot": "left",
+      "heightCm": 186,
+      "overall": 73,
+      "attributes": {
+        "pace": 78,
+        "acceleration": 76,
+        "stamina": 68,
+        "strength": 77,
+        "firstTouch": 65,
+        "dribbling": 70,
+        "shortPassing": 78,
+        "longPassing": 81,
+        "crossing": 77,
+        "finishing": 60,
+        "longShots": 74,
+        "heading": 69,
+        "tackling": 71,
+        "marking": 69,
+        "positioning": 74,
+        "vision": 63,
+        "composure": 68,
+        "workRate": 77,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (harte Distanzschüsse und Freistöße mit links)"
+      ]
+    },
+    {
+      "id": "ciriaco-sforza",
+      "name": "Ciriaco Sforza",
+      "shortName": "Sforza",
+      "number": 10,
+      "positions": [
+        "CM",
+        "SW",
+        "DM"
+      ],
+      "foot": "right",
+      "heightCm": 180,
+      "overall": 79,
+      "attributes": {
+        "pace": 70,
+        "acceleration": 70,
+        "stamina": 79,
+        "strength": 77,
+        "firstTouch": 87,
+        "dribbling": 69,
+        "shortPassing": 86,
+        "longPassing": 86,
+        "crossing": 84,
+        "finishing": 65,
+        "longShots": 78,
+        "heading": 50,
+        "tackling": 84,
+        "marking": 73,
+        "positioning": 83,
+        "vision": 80,
+        "composure": 69,
+        "workRate": 70,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (Mittelfeld-Führungsspieler, auch Libero)"
+      ]
+    },
+    {
+      "id": "paulo-sergio",
+      "name": "Paulo Sérgio",
+      "shortName": "Paulo Sérgio",
+      "number": 13,
+      "positions": [
+        "ST",
+        "LW"
+      ],
+      "foot": "right",
+      "heightCm": 180,
+      "overall": 70,
+      "attributes": {
+        "pace": 60,
+        "acceleration": 60,
+        "stamina": 60,
+        "strength": 73,
+        "firstTouch": 79,
+        "dribbling": 79,
+        "shortPassing": 80,
+        "longPassing": 79,
+        "crossing": 60,
+        "finishing": 66,
+        "longShots": 66,
+        "heading": 73,
+        "tackling": 40,
+        "marking": 60,
+        "positioning": 69,
+        "vision": 79,
+        "composure": 67,
+        "workRate": 73,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "Spielweise: Wikipedia (hängende Spitze)"
+      ]
+    },
+    {
+      "id": "carsten-jancker",
+      "name": "Carsten Jancker",
+      "shortName": "Jancker",
+      "number": 19,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 81,
+      "attributes": {
+        "pace": 83,
+        "acceleration": 83,
+        "stamina": 80,
+        "strength": 94,
+        "firstTouch": 78,
+        "dribbling": 74,
+        "shortPassing": 80,
+        "longPassing": 53,
+        "crossing": 50,
+        "finishing": 80,
+        "longShots": 83,
+        "heading": 84,
+        "tackling": 57,
+        "marking": 60,
+        "positioning": 73,
+        "vision": 53,
+        "composure": 77,
+        "workRate": 99,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (kräftiger Zielspieler, langsam, gute Ablagen, starker Rechtsschuss, laut Artikel schwach im Kopfball)"
+      ]
+    },
+    {
+      "id": "alexander-zickler",
+      "name": "Alexander Zickler",
+      "shortName": "Zickler",
+      "number": 21,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 188,
+      "overall": 68,
+      "attributes": {
+        "pace": 60,
+        "acceleration": 60,
+        "stamina": 68,
+        "strength": 68,
+        "firstTouch": 68,
+        "dribbling": 68,
+        "shortPassing": 68,
+        "longPassing": 58,
+        "crossing": 58,
+        "finishing": 71,
+        "longShots": 68,
+        "heading": 68,
+        "tackling": 58,
+        "marking": 58,
+        "positioning": 68,
+        "vision": 58,
+        "composure": 73,
+        "workRate": 68,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "Spielweise: Wikipedia (Rekord-Joker)"
+      ]
+    },
+    {
+      "id": "roque-santa-cruz",
+      "name": "Roque Santa Cruz",
+      "shortName": "Santa Cruz",
+      "number": 24,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 69,
+      "attributes": {
+        "pace": 67,
+        "acceleration": 69,
+        "stamina": 78,
+        "strength": 74,
+        "firstTouch": 73,
+        "dribbling": 74,
+        "shortPassing": 64,
+        "longPassing": 38,
+        "crossing": 52,
+        "finishing": 58,
+        "longShots": 58,
+        "heading": 76,
+        "tackling": 37,
+        "marking": 36,
+        "positioning": 69,
+        "vision": 47,
+        "composure": 84,
+        "workRate": 84,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Faktenblatt (1,93 m Mittelstürmer)"
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": "oliver-kahn",
+      "name": "Oliver Kahn",
+      "shortName": "Kahn",
+      "number": 1,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 188,
+      "overall": 95,
+      "attributes": {
+        "pace": 43,
+        "acceleration": 39,
+        "stamina": 48,
+        "strength": 50,
+        "firstTouch": 30,
+        "dribbling": 41,
+        "shortPassing": 40,
+        "longPassing": 28,
+        "crossing": 40,
+        "finishing": 40,
+        "longShots": 38,
+        "heading": 40,
+        "tackling": 41,
+        "marking": 27,
+        "positioning": 35,
+        "vision": 30,
+        "composure": 37,
+        "workRate": 50,
+        "gkReflexes": 99,
+        "gkHandling": 96,
+        "gkPositioning": 98,
+        "gkDistribution": 79
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Rangliste-Text (Weltklasse auf der Linie/1-gegen-1, Schwächen mit dem Fuß, hohe Bälle verbessert); Wikipedia",
+        "Auszeichnungen: Ballon d'Or 2001 Platz 3, UEFA-Klubtorhüter, Fußballer des Jahres"
+      ]
+    },
+    {
+      "id": "samuel-kuffour",
+      "name": "Samuel Kuffour",
+      "shortName": "Kuffour",
+      "number": 4,
+      "positions": [
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 178,
+      "overall": 82,
+      "attributes": {
+        "pace": 92,
+        "acceleration": 92,
+        "stamina": 83,
+        "strength": 86,
+        "firstTouch": 80,
+        "dribbling": 63,
+        "shortPassing": 76,
+        "longPassing": 74,
+        "crossing": 51,
+        "finishing": 57,
+        "longShots": 57,
+        "heading": 76,
+        "tackling": 87,
+        "marking": 83,
+        "positioning": 65,
+        "vision": 77,
+        "composure": 82,
+        "workRate": 98,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (physische Wucht; de.wikipedia: Inkonstanz/Aussetzer)",
+        "Auszeichnungen: BBC African Footballer of the Year 2001"
+      ]
+    },
+    {
+      "id": "patrik-andersson",
+      "name": "Patrik Andersson",
+      "shortName": "Andersson",
+      "number": 5,
+      "positions": [
+        "SW",
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 185,
+      "overall": 89,
+      "attributes": {
+        "pace": 80,
+        "acceleration": 82,
+        "stamina": 96,
+        "strength": 89,
+        "firstTouch": 80,
+        "dribbling": 57,
+        "shortPassing": 85,
+        "longPassing": 92,
+        "crossing": 67,
+        "finishing": 57,
+        "longShots": 56,
+        "heading": 94,
+        "tackling": 92,
+        "marking": 91,
+        "positioning": 72,
+        "vision": 93,
+        "composure": 89,
+        "workRate": 93,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Rangliste-Text (nicht schnell, Spiellesen/Stellungsspiel, sehr kopfballstark); Hitzfeld (ruhig, nervenstark)",
+        "Auszeichnungen: UEFA Team of the Year 2001"
+      ]
+    },
+    {
+      "id": "thomas-linke",
+      "name": "Thomas Linke",
+      "shortName": "Linke",
+      "number": 25,
+      "positions": [
+        "CB",
+        "LB"
+      ],
+      "foot": "left",
+      "heightCm": 183,
+      "overall": 78,
+      "attributes": {
+        "pace": 77,
+        "acceleration": 78,
+        "stamina": 73,
+        "strength": 76,
+        "firstTouch": 72,
+        "dribbling": 54,
+        "shortPassing": 72,
+        "longPassing": 77,
+        "crossing": 46,
+        "finishing": 53,
+        "longShots": 52,
+        "heading": 74,
+        "tackling": 83,
+        "marking": 85,
+        "positioning": 66,
+        "vision": 73,
+        "composure": 75,
+        "workRate": 87,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Rangliste-Text (linker Manndecker, kopfballstark, eng am Mann, nützlich im Aufbau)"
+      ]
+    },
+    {
+      "id": "willy-sagnol",
+      "name": "Willy Sagnol",
+      "shortName": "Sagnol",
+      "number": 2,
+      "positions": [
+        "RWB",
+        "RB"
+      ],
+      "foot": "right",
+      "heightCm": 180,
+      "overall": 79,
+      "attributes": {
+        "pace": 80,
+        "acceleration": 81,
+        "stamina": 74,
+        "strength": 62,
+        "firstTouch": 80,
+        "dribbling": 74,
+        "shortPassing": 55,
+        "longPassing": 83,
+        "crossing": 81,
+        "finishing": 53,
+        "longShots": 53,
+        "heading": 72,
+        "tackling": 83,
+        "marking": 80,
+        "positioning": 68,
+        "vision": 79,
+        "composure": 74,
+        "workRate": 67,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (exzellente Flanken, Wing-Back)"
+      ]
+    },
+    {
+      "id": "owen-hargreaves",
+      "name": "Owen Hargreaves",
+      "shortName": "Hargreaves",
+      "number": 23,
+      "positions": [
+        "DM",
+        "CM"
+      ],
+      "foot": "right",
+      "heightCm": 180,
+      "overall": 72,
+      "attributes": {
+        "pace": 80,
+        "acceleration": 80,
+        "stamina": 76,
+        "strength": 52,
+        "firstTouch": 72,
+        "dribbling": 68,
+        "shortPassing": 70,
+        "longPassing": 72,
+        "crossing": 58,
+        "finishing": 63,
+        "longShots": 61,
+        "heading": 43,
+        "tackling": 72,
+        "marking": 75,
+        "positioning": 64,
+        "vision": 64,
+        "composure": 76,
+        "workRate": 69,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (unermüdlich, Balleroberer)"
+      ]
+    },
+    {
+      "id": "stefan-effenberg",
+      "name": "Stefan Effenberg",
+      "shortName": "Effenberg",
+      "number": 11,
+      "positions": [
+        "CM",
+        "DM",
+        "AM"
+      ],
+      "foot": "right",
+      "heightCm": 188,
+      "overall": 90,
+      "attributes": {
+        "pace": 90,
+        "acceleration": 90,
+        "stamina": 93,
+        "strength": 87,
+        "firstTouch": 88,
+        "dribbling": 87,
+        "shortPassing": 85,
+        "longPassing": 95,
+        "crossing": 80,
+        "finishing": 84,
+        "longShots": 89,
+        "heading": 60,
+        "tackling": 89,
+        "marking": 79,
+        "positioning": 95,
+        "vision": 95,
+        "composure": 94,
+        "workRate": 94,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "Spielweise: Rangliste-Text (lange Bälle, Ausdauer, Distanzschüsse/Freistöße, harte Zweikämpfe); bundesliga.com (Nerven wie Drahtseile)",
+        "Auszeichnungen: UEFA-Klubfußballer des Jahres 2001, CL-MVP"
+      ]
+    },
+    {
+      "id": "bixente-lizarazu",
+      "name": "Bixente Lizarazu",
+      "shortName": "Lizarazu",
+      "number": 3,
+      "positions": [
+        "LWB",
+        "LB"
+      ],
+      "foot": "left",
+      "heightCm": 169,
+      "overall": 90,
+      "attributes": {
+        "pace": 89,
+        "acceleration": 96,
+        "stamina": 90,
+        "strength": 90,
+        "firstTouch": 98,
+        "dribbling": 93,
+        "shortPassing": 94,
+        "longPassing": 96,
+        "crossing": 97,
+        "finishing": 67,
+        "longShots": 67,
+        "heading": 59,
+        "tackling": 86,
+        "marking": 90,
+        "positioning": 97,
+        "vision": 90,
+        "composure": 89,
+        "workRate": 93,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (Tempo, Ausdauer, präzise Flanken, Technik; 1,69 m); EA FC 26 Hero als Plausibilitätsanker",
+        "Auszeichnungen: UEFA Team of the Year 2001"
+      ]
+    },
+    {
+      "id": "hasan-salihamidzic",
+      "name": "Hasan Salihamidžić",
+      "shortName": "Salihamidžić",
+      "number": 20,
+      "positions": [
+        "RM",
+        "AM",
+        "RWB"
+      ],
+      "foot": "right",
+      "heightCm": 175,
+      "overall": 85,
+      "attributes": {
+        "pace": 84,
+        "acceleration": 80,
+        "stamina": 98,
+        "strength": 88,
+        "firstTouch": 79,
+        "dribbling": 85,
+        "shortPassing": 81,
+        "longPassing": 69,
+        "crossing": 86,
+        "finishing": 69,
+        "longShots": 69,
+        "heading": 51,
+        "tackling": 54,
+        "marking": 56,
+        "positioning": 85,
+        "vision": 73,
+        "composure": 71,
+        "workRate": 88,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (Laufbereitschaft, Tempo, Flanken und Passspiel, taktisch flexibel)"
+      ]
+    },
+    {
+      "id": "mehmet-scholl",
+      "name": "Mehmet Scholl",
+      "shortName": "Scholl",
+      "number": 7,
+      "positions": [
+        "AM",
+        "LM"
+      ],
+      "foot": "right",
+      "heightCm": 177,
+      "overall": 90,
+      "attributes": {
+        "pace": 83,
+        "acceleration": 90,
+        "stamina": 79,
+        "strength": 78,
+        "firstTouch": 99,
+        "dribbling": 99,
+        "shortPassing": 91,
+        "longPassing": 84,
+        "crossing": 80,
+        "finishing": 98,
+        "longShots": 94,
+        "heading": 56,
+        "tackling": 60,
+        "marking": 55,
+        "positioning": 94,
+        "vision": 99,
+        "composure": 99,
+        "workRate": 78,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Rangliste-Text (leichtfüßig, technisch, intelligent, Freistöße, Schusstechnik)",
+        "Auszeichnungen: ESM Team of the Year 2000/01"
+      ]
+    },
+    {
+      "id": "giovane-elber",
+      "name": "Giovane Élber",
+      "shortName": "Élber",
+      "number": 9,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 182,
+      "overall": 87,
+      "attributes": {
+        "pace": 86,
+        "acceleration": 86,
+        "stamina": 88,
+        "strength": 87,
+        "firstTouch": 89,
+        "dribbling": 90,
+        "shortPassing": 84,
+        "longPassing": 73,
+        "crossing": 79,
+        "finishing": 93,
+        "longShots": 92,
+        "heading": 86,
+        "tackling": 60,
+        "marking": 63,
+        "positioning": 75,
+        "vision": 83,
+        "composure": 88,
+        "workRate": 97,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: UEFA.com ('quick feet and decisive passing'); Wikipedia (torgefährlich)"
+      ]
+    },
+    {
+      "id": "bernd-dreher",
+      "name": "Bernd Dreher",
+      "shortName": "Dreher",
+      "number": 22,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 187,
+      "overall": 64,
+      "attributes": {
+        "pace": 35,
+        "acceleration": 35,
+        "stamina": 35,
+        "strength": 35,
+        "firstTouch": 35,
+        "dribbling": 35,
+        "shortPassing": 35,
+        "longPassing": 35,
+        "crossing": 35,
+        "finishing": 35,
+        "longShots": 35,
+        "heading": 35,
+        "tackling": 35,
+        "marking": 35,
+        "positioning": 35,
+        "vision": 35,
+        "composure": 35,
+        "workRate": 35,
+        "gkReflexes": 64,
+        "gkHandling": 64,
+        "gkPositioning": 64,
+        "gkDistribution": 64
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)"
+      ]
+    },
+    {
+      "id": "michael-tarnat",
+      "name": "Michael Tarnat",
+      "shortName": "Tarnat",
+      "number": 18,
+      "positions": [
+        "LB",
+        "LWB",
+        "DM"
+      ],
+      "foot": "left",
+      "heightCm": 186,
+      "overall": 73,
+      "attributes": {
+        "pace": 78,
+        "acceleration": 76,
+        "stamina": 68,
+        "strength": 77,
+        "firstTouch": 65,
+        "dribbling": 70,
+        "shortPassing": 78,
+        "longPassing": 81,
+        "crossing": 77,
+        "finishing": 60,
+        "longShots": 74,
+        "heading": 69,
+        "tackling": 71,
+        "marking": 69,
+        "positioning": 74,
+        "vision": 63,
+        "composure": 68,
+        "workRate": 77,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (harte Distanzschüsse und Freistöße mit links)"
+      ]
+    },
+    {
+      "id": "ciriaco-sforza",
+      "name": "Ciriaco Sforza",
+      "shortName": "Sforza",
+      "number": 10,
+      "positions": [
+        "CM",
+        "SW",
+        "DM"
+      ],
+      "foot": "right",
+      "heightCm": 180,
+      "overall": 79,
+      "attributes": {
+        "pace": 70,
+        "acceleration": 70,
+        "stamina": 79,
+        "strength": 77,
+        "firstTouch": 87,
+        "dribbling": 69,
+        "shortPassing": 86,
+        "longPassing": 86,
+        "crossing": 84,
+        "finishing": 65,
+        "longShots": 78,
+        "heading": 50,
+        "tackling": 84,
+        "marking": 73,
+        "positioning": 83,
+        "vision": 80,
+        "composure": 69,
+        "workRate": 70,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (Mittelfeld-Führungsspieler, auch Libero)"
+      ]
+    },
+    {
+      "id": "paulo-sergio",
+      "name": "Paulo Sérgio",
+      "shortName": "Paulo Sérgio",
+      "number": 13,
+      "positions": [
+        "ST",
+        "LW"
+      ],
+      "foot": "right",
+      "heightCm": 180,
+      "overall": 70,
+      "attributes": {
+        "pace": 60,
+        "acceleration": 60,
+        "stamina": 60,
+        "strength": 73,
+        "firstTouch": 79,
+        "dribbling": 79,
+        "shortPassing": 80,
+        "longPassing": 79,
+        "crossing": 60,
+        "finishing": 66,
+        "longShots": 66,
+        "heading": 73,
+        "tackling": 40,
+        "marking": 60,
+        "positioning": 69,
+        "vision": 79,
+        "composure": 67,
+        "workRate": 73,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "Spielweise: Wikipedia (hängende Spitze)"
+      ]
+    },
+    {
+      "id": "carsten-jancker",
+      "name": "Carsten Jancker",
+      "shortName": "Jancker",
+      "number": 19,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 81,
+      "attributes": {
+        "pace": 83,
+        "acceleration": 83,
+        "stamina": 80,
+        "strength": 94,
+        "firstTouch": 78,
+        "dribbling": 74,
+        "shortPassing": 80,
+        "longPassing": 53,
+        "crossing": 50,
+        "finishing": 80,
+        "longShots": 83,
+        "heading": 84,
+        "tackling": 57,
+        "marking": 60,
+        "positioning": 73,
+        "vision": 53,
+        "composure": 77,
+        "workRate": 99,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "kicker-Rangliste (historical-lineups.com A–Z 1955–2017)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Wikipedia (kräftiger Zielspieler, langsam, gute Ablagen, starker Rechtsschuss, laut Artikel schwach im Kopfball)"
+      ]
+    },
+    {
+      "id": "alexander-zickler",
+      "name": "Alexander Zickler",
+      "shortName": "Zickler",
+      "number": 21,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 188,
+      "overall": 68,
+      "attributes": {
+        "pace": 60,
+        "acceleration": 60,
+        "stamina": 68,
+        "strength": 68,
+        "firstTouch": 68,
+        "dribbling": 68,
+        "shortPassing": 68,
+        "longPassing": 58,
+        "crossing": 58,
+        "finishing": 71,
+        "longShots": 68,
+        "heading": 68,
+        "tackling": 58,
+        "marking": 58,
+        "positioning": 68,
+        "vision": 58,
+        "composure": 73,
+        "workRate": 68,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "CM 97/98 – Perzentil in Positionsgruppe (Saison 1997/98, npm cm9798)",
+        "Spielweise: Wikipedia (Rekord-Joker)"
+      ]
+    },
+    {
+      "id": "roque-santa-cruz",
+      "name": "Roque Santa Cruz",
+      "shortName": "Santa Cruz",
+      "number": 24,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 69,
+      "attributes": {
+        "pace": 67,
+        "acceleration": 69,
+        "stamina": 78,
+        "strength": 74,
+        "firstTouch": 73,
+        "dribbling": 74,
+        "shortPassing": 64,
+        "longPassing": 38,
+        "crossing": 52,
+        "finishing": 58,
+        "longShots": 58,
+        "heading": 76,
+        "tackling": 37,
+        "marking": 36,
+        "positioning": 69,
+        "vision": 47,
+        "composure": 84,
+        "workRate": 84,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "geschätzt",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2001.json)",
+        "FIFA 05 – Perzentil in Positionsgruppe (Saison 2004/05, fifaindex via lbenz730/fifa_model)",
+        "Spielweise: Faktenblatt (1,93 m Mittelstürmer)"
+      ]
+    }
+  ],
+  "notes": "Hitzfelds 3-4-2-1 aus dem CL-Finale 2001 (Quellen nennen 3-5-2 bzw. 3-4-1-2; Wikipedia-Positionen: drei IV, zwei Wing-Backs, Hargreaves/Effenberg zentral, Scholl und Salihamidžić als offensive Mittelfeldspieler hinter Élber). Dreierkette Kuffour–Andersson–Linke mit drei Manndeckern, Andersson als Abwehrchef/Libero (Henke-Interview fcbayern.com 2026, RSSSF, kicker-Rangliste S01: Libero IK #1). Gegen den Ball rücken Sagnol und Lizarazu in eine Fünferkette zurück; kompakt, mittelhohe bis tiefe Linie, wenig Pressing (Annahme: zu Pressinghöhe/Abseitslinie gibt es keine Quellen). Ballbesitz im Finale 64 %, Flanken über die Wing-Backs, Konter, akribische Standards (UEFA.com: „effective if unspectacular“). Standards: Effenberg (Elfmeter im Finale, Freistöße), Scholl (Freistöße, verschoss Elfmeter 7.), Tarnat (Freistöße links); Ecken nicht belegt, Annahme Effenberg/Scholl. Trainer: Halbzeit-Umstellung auf Viererkette bei Rückstand (Jancker für Sagnol), späte Offensivwechsel (100., 108.); in der CL-Saison Stürmerwechsel meist ab ca. 60. Minute (RSSSF). Trikot: silbernes Ausweichtrikot (Third) der Saison 2000/01, in der CL gegen Arsenal und Manchester United getragen (museumofjerseys.com); weitere Trikots: Heim rot/navy (footballkitarchive), Auswärts weiß mit roten Streifen und Navy-Besatz (footballkitarchive, classic11), Torwart 1 himmelblau/navy (footballkitarchive). Nummern-/Hosenfarbe nicht belegt (Navy gewählt für Lesbarkeit). Spielerwerte: siehe src/data/players/ratings-2001-2020.md."
+}

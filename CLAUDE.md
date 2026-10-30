@@ -29,3 +29,4 @@ Private Web-App: historische FC-Bayern-Mannschaften (1950–heute) spielen gegen
 8. `FEEDBACK.md` enthält Andreas' Rückmeldungen – die haben Vorrang vor neuen Funktionen.
 9. Bei Unsicherheit über Andreas' Wünsche: nicht raten, Frage in den PR schreiben und eine vertretbare Annahme dokumentieren.
 10. Keine Kosten verursachen: keine kostenpflichtigen Dienste oder APIs ohne Andreas' Zustimmung.
+11. Nutzungsvolumen schonen: Andreas teilt sein Claude-Kontingent mit seiner täglichen Arbeit, rund 10 % müssen immer frei bleiben. Deshalb sparsam arbeiten: höchstens ein Subagent gleichzeitig, keine breiten Recherche-Fächer ohne Rücksprache, große Dateien per Skript statt im Kontext verarbeiten, ein Lauf = eine Aufgabe. Bricht ein Lauf wegen eines Nutzungslimits ab: Zwischenstand committen und stoppen, nicht wiederholen.

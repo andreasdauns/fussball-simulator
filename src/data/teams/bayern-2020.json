@@ -1,0 +1,1691 @@
+{
+  "id": "bayern-2020",
+  "name": "FC Bayern München 2019/20",
+  "shortName": "Bayern 20",
+  "season": "2019/20",
+  "era": 2020,
+  "colors": {
+    "primary": "#dc052d",
+    "secondary": "#ffffff",
+    "numbers": "#ffffff",
+    "gkPrimary": "#2bb673"
+  },
+  "coach": {
+    "name": "Hansi Flick",
+    "firstSubMinute": 66,
+    "aggressionWhenTrailing": 0.6,
+    "cautionWhenLeading": 0.45,
+    "maxSubs": 5
+  },
+  "tactic": {
+    "formation": "4-2-3-1",
+    "pressingHeight": 0.9,
+    "pressingIntensity": 0.9,
+    "defensiveLine": 0.88,
+    "width": 0.75,
+    "directness": 0.45,
+    "tempo": 0.8,
+    "crossingFocus": 0.55,
+    "counterAttack": 0.7,
+    "manMarking": 0.1,
+    "offsideTrap": 0.7,
+    "gameManagement": 0.3,
+    "freeKickTakers": [
+      "david-alaba",
+      "robert-lewandowski",
+      "philippe-coutinho"
+    ],
+    "cornerTakers": [
+      "joshua-kimmich"
+    ],
+    "penaltyTakers": [
+      "robert-lewandowski"
+    ],
+    "captain": "manuel-neuer"
+  },
+  "lineup": [
+    {
+      "playerId": "manuel-neuer",
+      "position": "GK",
+      "role": "goalkeeper",
+      "anchorAttack": {
+        "x": 13,
+        "y": 34
+      },
+      "anchorDefend": {
+        "x": 7,
+        "y": 34
+      }
+    },
+    {
+      "playerId": "joshua-kimmich",
+      "position": "RB",
+      "role": "full-back",
+      "anchorAttack": {
+        "x": 60,
+        "y": 62
+      },
+      "anchorDefend": {
+        "x": 26,
+        "y": 58
+      }
+    },
+    {
+      "playerId": "jerome-boateng",
+      "position": "CB",
+      "role": "ball-playing-cb",
+      "anchorAttack": {
+        "x": 40,
+        "y": 45
+      },
+      "anchorDefend": {
+        "x": 22,
+        "y": 42
+      }
+    },
+    {
+      "playerId": "david-alaba",
+      "position": "CB",
+      "role": "ball-playing-cb",
+      "anchorAttack": {
+        "x": 40,
+        "y": 23
+      },
+      "anchorDefend": {
+        "x": 22,
+        "y": 26
+      }
+    },
+    {
+      "playerId": "alphonso-davies",
+      "position": "LB",
+      "role": "full-back",
+      "anchorAttack": {
+        "x": 66,
+        "y": 5
+      },
+      "anchorDefend": {
+        "x": 27,
+        "y": 10
+      }
+    },
+    {
+      "playerId": "thiago-alcantara",
+      "position": "DM",
+      "role": "deep-playmaker",
+      "anchorAttack": {
+        "x": 50,
+        "y": 40
+      },
+      "anchorDefend": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "playerId": "leon-goretzka",
+      "position": "CM",
+      "role": "box-to-box",
+      "anchorAttack": {
+        "x": 58,
+        "y": 27
+      },
+      "anchorDefend": {
+        "x": 38,
+        "y": 29
+      }
+    },
+    {
+      "playerId": "serge-gnabry",
+      "position": "RW",
+      "role": "inside-forward",
+      "anchorAttack": {
+        "x": 82,
+        "y": 56
+      },
+      "anchorDefend": {
+        "x": 54,
+        "y": 56
+      }
+    },
+    {
+      "playerId": "thomas-mueller",
+      "position": "AM",
+      "role": "shadow-striker",
+      "anchorAttack": {
+        "x": 85,
+        "y": 42
+      },
+      "anchorDefend": {
+        "x": 60,
+        "y": 38
+      }
+    },
+    {
+      "playerId": "kingsley-coman",
+      "position": "LW",
+      "role": "winger",
+      "anchorAttack": {
+        "x": 82,
+        "y": 9
+      },
+      "anchorDefend": {
+        "x": 54,
+        "y": 12
+      }
+    },
+    {
+      "playerId": "robert-lewandowski",
+      "position": "ST",
+      "role": "complete-forward",
+      "anchorAttack": {
+        "x": 92,
+        "y": 31
+      },
+      "anchorDefend": {
+        "x": 64,
+        "y": 31
+      }
+    }
+  ],
+  "bench": [
+    {
+      "id": "sven-ulreich",
+      "name": "Sven Ulreich",
+      "shortName": "Ulreich",
+      "number": 26,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 66,
+      "attributes": {
+        "pace": 27,
+        "acceleration": 27,
+        "stamina": 24,
+        "strength": 26,
+        "firstTouch": 33,
+        "dribbling": 29,
+        "shortPassing": 45,
+        "longPassing": 43,
+        "crossing": 35,
+        "finishing": 31,
+        "longShots": 23,
+        "heading": 20,
+        "tackling": 44,
+        "marking": 35,
+        "positioning": 22,
+        "vision": 29,
+        "composure": 23,
+        "workRate": 30,
+        "gkReflexes": 75,
+        "gkHandling": 53,
+        "gkPositioning": 70,
+        "gkDistribution": 55
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "ron-thorben-hoffmann",
+      "name": "Ron-Thorben Hoffmann",
+      "shortName": "Hoffmann",
+      "number": 39,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 58,
+      "attributes": {
+        "pace": 20,
+        "acceleration": 20,
+        "stamina": 20,
+        "strength": 22,
+        "firstTouch": 23,
+        "dribbling": 21,
+        "shortPassing": 23,
+        "longPassing": 33,
+        "crossing": 31,
+        "finishing": 21,
+        "longShots": 23,
+        "heading": 28,
+        "tackling": 20,
+        "marking": 32,
+        "positioning": 20,
+        "vision": 23,
+        "composure": 20,
+        "workRate": 23,
+        "gkReflexes": 57,
+        "gkHandling": 57,
+        "gkPositioning": 57,
+        "gkDistribution": 60
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "alvaro-odriozola",
+      "name": "Álvaro Odriozola",
+      "shortName": "Odriozola",
+      "number": 2,
+      "positions": [
+        "RB"
+      ],
+      "foot": "right",
+      "heightCm": 176,
+      "overall": 64,
+      "attributes": {
+        "pace": 68,
+        "acceleration": 69,
+        "stamina": 65,
+        "strength": 48,
+        "firstTouch": 63,
+        "dribbling": 63,
+        "shortPassing": 65,
+        "longPassing": 63,
+        "crossing": 68,
+        "finishing": 39,
+        "longShots": 43,
+        "heading": 60,
+        "tackling": 58,
+        "marking": 62,
+        "positioning": 57,
+        "vision": 53,
+        "composure": 49,
+        "workRate": 49,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "niklas-suele",
+      "name": "Niklas Süle",
+      "shortName": "Süle",
+      "number": 4,
+      "positions": [
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 195,
+      "overall": 79,
+      "attributes": {
+        "pace": 83,
+        "acceleration": 59,
+        "stamina": 62,
+        "strength": 83,
+        "firstTouch": 59,
+        "dribbling": 45,
+        "shortPassing": 79,
+        "longPassing": 70,
+        "crossing": 45,
+        "finishing": 45,
+        "longShots": 60,
+        "heading": 82,
+        "tackling": 82,
+        "marking": 79,
+        "positioning": 45,
+        "vision": 63,
+        "composure": 71,
+        "workRate": 66,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "benjamin-pavard",
+      "name": "Benjamin Pavard",
+      "shortName": "Pavard",
+      "number": 5,
+      "positions": [
+        "RB",
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 186,
+      "overall": 82,
+      "attributes": {
+        "pace": 70,
+        "acceleration": 69,
+        "stamina": 78,
+        "strength": 91,
+        "firstTouch": 82,
+        "dribbling": 67,
+        "shortPassing": 90,
+        "longPassing": 96,
+        "crossing": 73,
+        "finishing": 55,
+        "longShots": 56,
+        "heading": 86,
+        "tackling": 87,
+        "marking": 96,
+        "positioning": 67,
+        "vision": 80,
+        "composure": 91,
+        "workRate": 73,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "lucas-hernandez",
+      "name": "Lucas Hernández",
+      "shortName": "Hernández",
+      "number": 21,
+      "positions": [
+        "CB",
+        "LB"
+      ],
+      "foot": "left",
+      "heightCm": 182,
+      "overall": 71,
+      "attributes": {
+        "pace": 77,
+        "acceleration": 78,
+        "stamina": 76,
+        "strength": 59,
+        "firstTouch": 78,
+        "dribbling": 45,
+        "shortPassing": 76,
+        "longPassing": 56,
+        "crossing": 76,
+        "finishing": 51,
+        "longShots": 45,
+        "heading": 74,
+        "tackling": 73,
+        "marking": 71,
+        "positioning": 49,
+        "vision": 72,
+        "composure": 69,
+        "workRate": 79,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "javi-martinez",
+      "name": "Javi Martínez",
+      "shortName": "Martínez",
+      "number": 8,
+      "positions": [
+        "DM",
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 75,
+      "attributes": {
+        "pace": 53,
+        "acceleration": 53,
+        "stamina": 68,
+        "strength": 73,
+        "firstTouch": 74,
+        "dribbling": 46,
+        "shortPassing": 76,
+        "longPassing": 76,
+        "crossing": 51,
+        "finishing": 49,
+        "longShots": 56,
+        "heading": 81,
+        "tackling": 78,
+        "marking": 78,
+        "positioning": 49,
+        "vision": 81,
+        "composure": 76,
+        "workRate": 57,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "philippe-coutinho",
+      "name": "Philippe Coutinho",
+      "shortName": "Coutinho",
+      "number": 10,
+      "positions": [
+        "AM",
+        "LW"
+      ],
+      "foot": "right",
+      "heightCm": 172,
+      "overall": 75,
+      "attributes": {
+        "pace": 58,
+        "acceleration": 67,
+        "stamina": 69,
+        "strength": 61,
+        "firstTouch": 82,
+        "dribbling": 82,
+        "shortPassing": 78,
+        "longPassing": 80,
+        "crossing": 74,
+        "finishing": 75,
+        "longShots": 82,
+        "heading": 44,
+        "tackling": 55,
+        "marking": 55,
+        "positioning": 79,
+        "vision": 80,
+        "composure": 70,
+        "workRate": 66,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "mickael-cuisance",
+      "name": "Michaël Cuisance",
+      "shortName": "Cuisance",
+      "number": 11,
+      "positions": [
+        "CM"
+      ],
+      "foot": "left",
+      "heightCm": 181,
+      "overall": 64,
+      "attributes": {
+        "pace": 74,
+        "acceleration": 85,
+        "stamina": 58,
+        "strength": 57,
+        "firstTouch": 60,
+        "dribbling": 70,
+        "shortPassing": 65,
+        "longPassing": 61,
+        "crossing": 71,
+        "finishing": 48,
+        "longShots": 82,
+        "heading": 34,
+        "tackling": 57,
+        "marking": 57,
+        "positioning": 61,
+        "vision": 71,
+        "composure": 57,
+        "workRate": 59,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "ivan-perisic",
+      "name": "Ivan Perišić",
+      "shortName": "Perišić",
+      "number": 14,
+      "positions": [
+        "LW",
+        "LM"
+      ],
+      "foot": "both",
+      "heightCm": 186,
+      "overall": 80,
+      "attributes": {
+        "pace": 82,
+        "acceleration": 77,
+        "stamina": 90,
+        "strength": 91,
+        "firstTouch": 80,
+        "dribbling": 74,
+        "shortPassing": 81,
+        "longPassing": 81,
+        "crossing": 90,
+        "finishing": 89,
+        "longShots": 85,
+        "heading": 89,
+        "tackling": 59,
+        "marking": 64,
+        "positioning": 91,
+        "vision": 76,
+        "composure": 86,
+        "workRate": 76,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "corentin-tolisso",
+      "name": "Corentin Tolisso",
+      "shortName": "Tolisso",
+      "number": 24,
+      "positions": [
+        "CM"
+      ],
+      "foot": "right",
+      "heightCm": 181,
+      "overall": 70,
+      "attributes": {
+        "pace": 69,
+        "acceleration": 73,
+        "stamina": 65,
+        "strength": 69,
+        "firstTouch": 72,
+        "dribbling": 65,
+        "shortPassing": 72,
+        "longPassing": 78,
+        "crossing": 54,
+        "finishing": 73,
+        "longShots": 77,
+        "heading": 81,
+        "tackling": 69,
+        "marking": 67,
+        "positioning": 78,
+        "vision": 71,
+        "composure": 56,
+        "workRate": 69,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "joshua-zirkzee",
+      "name": "Joshua Zirkzee",
+      "shortName": "Zirkzee",
+      "number": 35,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 62,
+      "attributes": {
+        "pace": 68,
+        "acceleration": 75,
+        "stamina": 67,
+        "strength": 76,
+        "firstTouch": 59,
+        "dribbling": 62,
+        "shortPassing": 59,
+        "longPassing": 27,
+        "crossing": 29,
+        "finishing": 59,
+        "longShots": 59,
+        "heading": 64,
+        "tackling": 27,
+        "marking": 27,
+        "positioning": 59,
+        "vision": 32,
+        "composure": 59,
+        "workRate": 60,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    }
+  ],
+  "players": [
+    {
+      "id": "manuel-neuer",
+      "name": "Manuel Neuer",
+      "shortName": "Neuer",
+      "number": 1,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 93,
+      "attributes": {
+        "pace": 48,
+        "acceleration": 44,
+        "stamina": 47,
+        "strength": 49,
+        "firstTouch": 50,
+        "dribbling": 50,
+        "shortPassing": 49,
+        "longPassing": 50,
+        "crossing": 38,
+        "finishing": 34,
+        "longShots": 40,
+        "heading": 49,
+        "tackling": 21,
+        "marking": 36,
+        "positioning": 34,
+        "vision": 50,
+        "composure": 49,
+        "workRate": 35,
+        "gkReflexes": 92,
+        "gkHandling": 94,
+        "gkPositioning": 92,
+        "gkDistribution": 94
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "Auszeichnungen: The Best FIFA Goalkeeper 2020, UEFA Team of the Year 2020"
+      ]
+    },
+    {
+      "id": "joshua-kimmich",
+      "name": "Joshua Kimmich",
+      "shortName": "Kimmich",
+      "number": 32,
+      "positions": [
+        "DM",
+        "RB",
+        "CM"
+      ],
+      "foot": "right",
+      "heightCm": 176,
+      "overall": 91,
+      "attributes": {
+        "pace": 83,
+        "acceleration": 92,
+        "stamina": 95,
+        "strength": 72,
+        "firstTouch": 92,
+        "dribbling": 92,
+        "shortPassing": 94,
+        "longPassing": 94,
+        "crossing": 99,
+        "finishing": 82,
+        "longShots": 86,
+        "heading": 87,
+        "tackling": 92,
+        "marking": 91,
+        "positioning": 94,
+        "vision": 93,
+        "composure": 93,
+        "workRate": 85,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "Auszeichnungen: UEFA Team of the Year 2020, FIFPro World XI"
+      ]
+    },
+    {
+      "id": "jerome-boateng",
+      "name": "Jérôme Boateng",
+      "shortName": "Boateng",
+      "number": 17,
+      "positions": [
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 86,
+      "attributes": {
+        "pace": 81,
+        "acceleration": 78,
+        "stamina": 67,
+        "strength": 87,
+        "firstTouch": 79,
+        "dribbling": 59,
+        "shortPassing": 83,
+        "longPassing": 90,
+        "crossing": 74,
+        "finishing": 56,
+        "longShots": 64,
+        "heading": 88,
+        "tackling": 88,
+        "marking": 82,
+        "positioning": 57,
+        "vision": 89,
+        "composure": 89,
+        "workRate": 71,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "david-alaba",
+      "name": "David Alaba",
+      "shortName": "Alaba",
+      "number": 27,
+      "positions": [
+        "CB",
+        "LB"
+      ],
+      "foot": "left",
+      "heightCm": 180,
+      "overall": 84,
+      "attributes": {
+        "pace": 89,
+        "acceleration": 90,
+        "stamina": 88,
+        "strength": 64,
+        "firstTouch": 90,
+        "dribbling": 80,
+        "shortPassing": 90,
+        "longPassing": 88,
+        "crossing": 94,
+        "finishing": 71,
+        "longShots": 93,
+        "heading": 66,
+        "tackling": 79,
+        "marking": 83,
+        "positioning": 80,
+        "vision": 90,
+        "composure": 88,
+        "workRate": 62,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "alphonso-davies",
+      "name": "Alphonso Davies",
+      "shortName": "Davies",
+      "number": 19,
+      "positions": [
+        "LB",
+        "LM"
+      ],
+      "foot": "left",
+      "heightCm": 181,
+      "overall": 84,
+      "attributes": {
+        "pace": 99,
+        "acceleration": 99,
+        "stamina": 81,
+        "strength": 90,
+        "firstTouch": 85,
+        "dribbling": 95,
+        "shortPassing": 81,
+        "longPassing": 71,
+        "crossing": 72,
+        "finishing": 75,
+        "longShots": 66,
+        "heading": 61,
+        "tackling": 78,
+        "marking": 82,
+        "positioning": 88,
+        "vision": 85,
+        "composure": 84,
+        "workRate": 93,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "Auszeichnungen: UEFA Team of the Year 2020, FIFPro World XI"
+      ]
+    },
+    {
+      "id": "thiago-alcantara",
+      "name": "Thiago Alcântara",
+      "shortName": "Thiago",
+      "number": 6,
+      "positions": [
+        "DM",
+        "CM"
+      ],
+      "foot": "right",
+      "heightCm": 174,
+      "overall": 91,
+      "attributes": {
+        "pace": 81,
+        "acceleration": 98,
+        "stamina": 79,
+        "strength": 73,
+        "firstTouch": 99,
+        "dribbling": 99,
+        "shortPassing": 99,
+        "longPassing": 99,
+        "crossing": 96,
+        "finishing": 85,
+        "longShots": 93,
+        "heading": 64,
+        "tackling": 75,
+        "marking": 77,
+        "positioning": 97,
+        "vision": 99,
+        "composure": 99,
+        "workRate": 71,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "Auszeichnungen: UEFA Team of the Year 2020"
+      ]
+    },
+    {
+      "id": "leon-goretzka",
+      "name": "Leon Goretzka",
+      "shortName": "Goretzka",
+      "number": 18,
+      "positions": [
+        "CM",
+        "DM"
+      ],
+      "foot": "right",
+      "heightCm": 189,
+      "overall": 90,
+      "attributes": {
+        "pace": 94,
+        "acceleration": 96,
+        "stamina": 88,
+        "strength": 91,
+        "firstTouch": 93,
+        "dribbling": 92,
+        "shortPassing": 91,
+        "longPassing": 85,
+        "crossing": 89,
+        "finishing": 96,
+        "longShots": 95,
+        "heading": 99,
+        "tackling": 83,
+        "marking": 80,
+        "positioning": 96,
+        "vision": 92,
+        "composure": 89,
+        "workRate": 86,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "serge-gnabry",
+      "name": "Serge Gnabry",
+      "shortName": "Gnabry",
+      "number": 22,
+      "positions": [
+        "RW",
+        "LW"
+      ],
+      "foot": "right",
+      "heightCm": 175,
+      "overall": 84,
+      "attributes": {
+        "pace": 79,
+        "acceleration": 87,
+        "stamina": 78,
+        "strength": 84,
+        "firstTouch": 80,
+        "dribbling": 87,
+        "shortPassing": 79,
+        "longPassing": 75,
+        "crossing": 78,
+        "finishing": 89,
+        "longShots": 86,
+        "heading": 51,
+        "tackling": 61,
+        "marking": 60,
+        "positioning": 88,
+        "vision": 81,
+        "composure": 81,
+        "workRate": 81,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "thomas-mueller",
+      "name": "Thomas Müller",
+      "shortName": "Müller",
+      "number": 25,
+      "positions": [
+        "AM",
+        "RW",
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 186,
+      "overall": 88,
+      "attributes": {
+        "pace": 75,
+        "acceleration": 71,
+        "stamina": 98,
+        "strength": 90,
+        "firstTouch": 88,
+        "dribbling": 70,
+        "shortPassing": 95,
+        "longPassing": 91,
+        "crossing": 95,
+        "finishing": 99,
+        "longShots": 95,
+        "heading": 98,
+        "tackling": 69,
+        "marking": 64,
+        "positioning": 99,
+        "vision": 98,
+        "composure": 97,
+        "workRate": 95,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "kingsley-coman",
+      "name": "Kingsley Coman",
+      "shortName": "Coman",
+      "number": 29,
+      "positions": [
+        "LW",
+        "RW"
+      ],
+      "foot": "right",
+      "heightCm": 179,
+      "overall": 84,
+      "attributes": {
+        "pace": 91,
+        "acceleration": 91,
+        "stamina": 67,
+        "strength": 79,
+        "firstTouch": 89,
+        "dribbling": 89,
+        "shortPassing": 79,
+        "longPassing": 78,
+        "crossing": 80,
+        "finishing": 83,
+        "longShots": 74,
+        "heading": 56,
+        "tackling": 52,
+        "marking": 52,
+        "positioning": 89,
+        "vision": 82,
+        "composure": 78,
+        "workRate": 60,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "robert-lewandowski",
+      "name": "Robert Lewandowski",
+      "shortName": "Lewandowski",
+      "number": 9,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 184,
+      "overall": 94,
+      "attributes": {
+        "pace": 85,
+        "acceleration": 86,
+        "stamina": 90,
+        "strength": 92,
+        "firstTouch": 96,
+        "dribbling": 94,
+        "shortPassing": 96,
+        "longPassing": 78,
+        "crossing": 79,
+        "finishing": 97,
+        "longShots": 96,
+        "heading": 95,
+        "tackling": 70,
+        "marking": 65,
+        "positioning": 97,
+        "vision": 98,
+        "composure": 96,
+        "workRate": 91,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "Auszeichnungen: The Best FIFA Men's Player 2020, UEFA-Spieler des Jahres"
+      ]
+    },
+    {
+      "id": "sven-ulreich",
+      "name": "Sven Ulreich",
+      "shortName": "Ulreich",
+      "number": 26,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 66,
+      "attributes": {
+        "pace": 27,
+        "acceleration": 27,
+        "stamina": 24,
+        "strength": 26,
+        "firstTouch": 33,
+        "dribbling": 29,
+        "shortPassing": 45,
+        "longPassing": 43,
+        "crossing": 35,
+        "finishing": 31,
+        "longShots": 23,
+        "heading": 20,
+        "tackling": 44,
+        "marking": 35,
+        "positioning": 22,
+        "vision": 29,
+        "composure": 23,
+        "workRate": 30,
+        "gkReflexes": 75,
+        "gkHandling": 53,
+        "gkPositioning": 70,
+        "gkDistribution": 55
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "ron-thorben-hoffmann",
+      "name": "Ron-Thorben Hoffmann",
+      "shortName": "Hoffmann",
+      "number": 39,
+      "positions": [
+        "GK"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 58,
+      "attributes": {
+        "pace": 20,
+        "acceleration": 20,
+        "stamina": 20,
+        "strength": 22,
+        "firstTouch": 23,
+        "dribbling": 21,
+        "shortPassing": 23,
+        "longPassing": 33,
+        "crossing": 31,
+        "finishing": 21,
+        "longShots": 23,
+        "heading": 28,
+        "tackling": 20,
+        "marking": 32,
+        "positioning": 20,
+        "vision": 23,
+        "composure": 20,
+        "workRate": 23,
+        "gkReflexes": 57,
+        "gkHandling": 57,
+        "gkPositioning": 57,
+        "gkDistribution": 60
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "alvaro-odriozola",
+      "name": "Álvaro Odriozola",
+      "shortName": "Odriozola",
+      "number": 2,
+      "positions": [
+        "RB"
+      ],
+      "foot": "right",
+      "heightCm": 176,
+      "overall": 64,
+      "attributes": {
+        "pace": 68,
+        "acceleration": 69,
+        "stamina": 65,
+        "strength": 48,
+        "firstTouch": 63,
+        "dribbling": 63,
+        "shortPassing": 65,
+        "longPassing": 63,
+        "crossing": 68,
+        "finishing": 39,
+        "longShots": 43,
+        "heading": 60,
+        "tackling": 58,
+        "marking": 62,
+        "positioning": 57,
+        "vision": 53,
+        "composure": 49,
+        "workRate": 49,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "niklas-suele",
+      "name": "Niklas Süle",
+      "shortName": "Süle",
+      "number": 4,
+      "positions": [
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 195,
+      "overall": 79,
+      "attributes": {
+        "pace": 83,
+        "acceleration": 59,
+        "stamina": 62,
+        "strength": 83,
+        "firstTouch": 59,
+        "dribbling": 45,
+        "shortPassing": 79,
+        "longPassing": 70,
+        "crossing": 45,
+        "finishing": 45,
+        "longShots": 60,
+        "heading": 82,
+        "tackling": 82,
+        "marking": 79,
+        "positioning": 45,
+        "vision": 63,
+        "composure": 71,
+        "workRate": 66,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "benjamin-pavard",
+      "name": "Benjamin Pavard",
+      "shortName": "Pavard",
+      "number": 5,
+      "positions": [
+        "RB",
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 186,
+      "overall": 82,
+      "attributes": {
+        "pace": 70,
+        "acceleration": 69,
+        "stamina": 78,
+        "strength": 91,
+        "firstTouch": 82,
+        "dribbling": 67,
+        "shortPassing": 90,
+        "longPassing": 96,
+        "crossing": 73,
+        "finishing": 55,
+        "longShots": 56,
+        "heading": 86,
+        "tackling": 87,
+        "marking": 96,
+        "positioning": 67,
+        "vision": 80,
+        "composure": 91,
+        "workRate": 73,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "lucas-hernandez",
+      "name": "Lucas Hernández",
+      "shortName": "Hernández",
+      "number": 21,
+      "positions": [
+        "CB",
+        "LB"
+      ],
+      "foot": "left",
+      "heightCm": 182,
+      "overall": 71,
+      "attributes": {
+        "pace": 77,
+        "acceleration": 78,
+        "stamina": 76,
+        "strength": 59,
+        "firstTouch": 78,
+        "dribbling": 45,
+        "shortPassing": 76,
+        "longPassing": 56,
+        "crossing": 76,
+        "finishing": 51,
+        "longShots": 45,
+        "heading": 74,
+        "tackling": 73,
+        "marking": 71,
+        "positioning": 49,
+        "vision": 72,
+        "composure": 69,
+        "workRate": 79,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "javi-martinez",
+      "name": "Javi Martínez",
+      "shortName": "Martínez",
+      "number": 8,
+      "positions": [
+        "DM",
+        "CB"
+      ],
+      "foot": "right",
+      "heightCm": 192,
+      "overall": 75,
+      "attributes": {
+        "pace": 53,
+        "acceleration": 53,
+        "stamina": 68,
+        "strength": 73,
+        "firstTouch": 74,
+        "dribbling": 46,
+        "shortPassing": 76,
+        "longPassing": 76,
+        "crossing": 51,
+        "finishing": 49,
+        "longShots": 56,
+        "heading": 81,
+        "tackling": 78,
+        "marking": 78,
+        "positioning": 49,
+        "vision": 81,
+        "composure": 76,
+        "workRate": 57,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "philippe-coutinho",
+      "name": "Philippe Coutinho",
+      "shortName": "Coutinho",
+      "number": 10,
+      "positions": [
+        "AM",
+        "LW"
+      ],
+      "foot": "right",
+      "heightCm": 172,
+      "overall": 75,
+      "attributes": {
+        "pace": 58,
+        "acceleration": 67,
+        "stamina": 69,
+        "strength": 61,
+        "firstTouch": 82,
+        "dribbling": 82,
+        "shortPassing": 78,
+        "longPassing": 80,
+        "crossing": 74,
+        "finishing": 75,
+        "longShots": 82,
+        "heading": 44,
+        "tackling": 55,
+        "marking": 55,
+        "positioning": 79,
+        "vision": 80,
+        "composure": 70,
+        "workRate": 66,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "mickael-cuisance",
+      "name": "Michaël Cuisance",
+      "shortName": "Cuisance",
+      "number": 11,
+      "positions": [
+        "CM"
+      ],
+      "foot": "left",
+      "heightCm": 181,
+      "overall": 64,
+      "attributes": {
+        "pace": 74,
+        "acceleration": 85,
+        "stamina": 58,
+        "strength": 57,
+        "firstTouch": 60,
+        "dribbling": 70,
+        "shortPassing": 65,
+        "longPassing": 61,
+        "crossing": 71,
+        "finishing": 48,
+        "longShots": 82,
+        "heading": 34,
+        "tackling": 57,
+        "marking": 57,
+        "positioning": 61,
+        "vision": 71,
+        "composure": 57,
+        "workRate": 59,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "ivan-perisic",
+      "name": "Ivan Perišić",
+      "shortName": "Perišić",
+      "number": 14,
+      "positions": [
+        "LW",
+        "LM"
+      ],
+      "foot": "both",
+      "heightCm": 186,
+      "overall": 80,
+      "attributes": {
+        "pace": 82,
+        "acceleration": 77,
+        "stamina": 90,
+        "strength": 91,
+        "firstTouch": 80,
+        "dribbling": 74,
+        "shortPassing": 81,
+        "longPassing": 81,
+        "crossing": 90,
+        "finishing": 89,
+        "longShots": 85,
+        "heading": 89,
+        "tackling": 59,
+        "marking": 64,
+        "positioning": 91,
+        "vision": 76,
+        "composure": 86,
+        "workRate": 76,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "hoch",
+      "sources": [
+        "kicker-Rangliste W19/20+S20 (bulinews-Wiedergabe)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "corentin-tolisso",
+      "name": "Corentin Tolisso",
+      "shortName": "Tolisso",
+      "number": 24,
+      "positions": [
+        "CM"
+      ],
+      "foot": "right",
+      "heightCm": 181,
+      "overall": 70,
+      "attributes": {
+        "pace": 69,
+        "acceleration": 73,
+        "stamina": 65,
+        "strength": 69,
+        "firstTouch": 72,
+        "dribbling": 65,
+        "shortPassing": 72,
+        "longPassing": 78,
+        "crossing": 54,
+        "finishing": 73,
+        "longShots": 77,
+        "heading": 81,
+        "tackling": 69,
+        "marking": 67,
+        "positioning": 78,
+        "vision": 71,
+        "composure": 56,
+        "workRate": 69,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    },
+    {
+      "id": "joshua-zirkzee",
+      "name": "Joshua Zirkzee",
+      "shortName": "Zirkzee",
+      "number": 35,
+      "positions": [
+        "ST"
+      ],
+      "foot": "right",
+      "heightCm": 193,
+      "overall": 62,
+      "attributes": {
+        "pace": 68,
+        "acceleration": 75,
+        "stamina": 67,
+        "strength": 76,
+        "firstTouch": 59,
+        "dribbling": 62,
+        "shortPassing": 59,
+        "longPassing": 27,
+        "crossing": 29,
+        "finishing": 59,
+        "longShots": 59,
+        "heading": 64,
+        "tackling": 27,
+        "marking": 27,
+        "positioning": 59,
+        "vision": 32,
+        "composure": 59,
+        "workRate": 60,
+        "gkReflexes": 10,
+        "gkHandling": 10,
+        "gkPositioning": 10,
+        "gkDistribution": 10
+      },
+      "confidence": "mittel",
+      "sources": [
+        "Einsatzdaten Saison (Wikipedia/FBref, finals/bayern_2020.json)",
+        "FIFA 20 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)",
+        "FIFA 21 – Perzentil in Positionsgruppe, Top-5-Ligen ≥75 (sofifa-Datensatz)"
+      ]
+    }
+  ],
+  "notes": "Flicks 4-2-3-1 aus dem CL-Finale 2020 (ESPN; DFB-Datencenter nennt 4-3-3). Sehr hohe Abwehrlinie, abgesichert durch Neuer als mitspielenden Torwart, Davies’ Tempo und Alaba (Mastermind, BFW). Aggressives Angriffs- und ausgedehntes Gegenpressing (StatsBomb; 360player: 34,7 % Ballgewinnquote), Raumdeckung, Gegner nach außen lenken. Ballbesitz ~65 % in der Liga (statmuse), Außenverteidiger hoch und breit, Flügel ziehen ein, ~25 Flanken pro Spiel (Mastermind), schnelles Umschalten. Müller als Raumdeuter neben Lewandowski und Pressing-Anführer. Standards: Kimmich Ecken/Flanken (Notizen), Lewandowski Elfmeter, Freistöße Alaba/Lewandowski (bundesliga.com 09/2019), Coutinho (Wikipedia). Abseitsfalle: schnelles Herausrücken (BFW). Trainer: Doppelwechsel 68., Tolisso 86. zum Sichern der Führung; max. 5 Wechsel (Corona-Regel 2020). Trikot: rotes Heimtrikot 2019/20 (rot/weiß, footballkitarchive; fcbayern.com „ganz in Rot“). Torwarttrikot-Farbe nicht belegt (Grün als Kontrast gewählt). Spielerwerte: siehe src/data/players/ratings-2001-2020.md."
+}
