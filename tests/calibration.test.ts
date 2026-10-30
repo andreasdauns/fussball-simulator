@@ -5,6 +5,11 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { simulateMatch, type MatchResult, type TeamSheet } from '../src/engine';
 import { pressTeam, sweeperTeam, weakTeam } from './fixtures/teams';
+import bayern2001Json from '../src/data/teams/bayern-2001.json';
+import bayern2020Json from '../src/data/teams/bayern-2020.json';
+
+const BAYERN_2001 = bayern2001Json as unknown as TeamSheet;
+const BAYERN_2020 = bayern2020Json as unknown as TeamSheet;
 
 const N_EQUAL = 500;
 const N_STRONG = 300; // pro Heim-/Auswärts-Ansetzung
@@ -152,5 +157,84 @@ describe('Kalibrierung – taktisches Verhalten', () => {
     console.log('[Taktik] Flanken Libero/Pressing', bothOpp(crosses).toFixed(2), both(crosses).toFixed(2), 'Pässe', bothOpp(passes).toFixed(0), both(passes).toFixed(0));
     expect(bothOpp(crossShare)).toBeGreaterThan(both(crossShare) * 1.3);
     expect(both(passes)).toBeGreaterThan(bothOpp(passes));
+  });
+});
+
+/** Kopie einer Mannschaft mit allen Werten um d verschoben (Torwartwerte nur beim Torwart) */
+function raiseTeam(t: TeamSheet, d: number): TeamSheet {
+  const c = JSON.parse(JSON.stringify(t)) as TeamSheet;
+  for (const p of [...c.players, ...c.bench]) {
+    const isGk = p.positions[0] === 'GK';
+    for (const k of Object.keys(p.attributes) as (keyof typeof p.attributes)[]) {
+      if (k.startsWith('gk') !== isGk) continue;
+      p.attributes[k] = p.attributes[k] + d;
+    }
+    p.overall += d;
+  }
+  return c;
+}
+
+describe('Kalibrierung – echte Mannschaften: Bayern 2001 gegen Bayern 2020', () => {
+  const N = 150; // pro Ansetzung → 300 Spiele
+  /** Ergebnisse aus Sicht von 2001 (a) und 2020 (b) */
+  interface Row { r: MatchResult; a: 'home' | 'away'; b: 'home' | 'away' }
+  let rows: Row[] = [];
+  beforeAll(() => {
+    rows = [
+      ...run(BAYERN_2001, BAYERN_2020, N, 60_000).map((r) => ({ r, a: 'home' as const, b: 'away' as const })),
+      ...run(BAYERN_2020, BAYERN_2001, N, 70_000).map((r) => ({ r, a: 'away' as const, b: 'home' as const })),
+    ];
+  });
+  const per = (f: (x: Row) => number) => avg(rows.map(f));
+  const crosses = (r: MatchResult, side: 'home' | 'away') => r.events.filter((e) => e.type === 'cross' && e.team === side).length;
+
+  it('Tore, Schüsse und Ergebnisverteilung sind realistisch und ausgeglichen', () => {
+    const m = {
+      goals: per(({ r }) => r.score.home + r.score.away),
+      shots2001: per(({ r, a }) => r.stats[a].shots),
+      shots2020: per(({ r, b }) => r.stats[b].shots),
+      win2001: rows.filter(({ r, a, b }) => r.score[a] > r.score[b]).length / rows.length,
+      win2020: rows.filter(({ r, a, b }) => r.score[b] > r.score[a]).length / rows.length,
+      draw: rows.filter(({ r }) => r.score.home === r.score.away).length / rows.length,
+    };
+    console.log('[Kalibrierung Bayern 2001–2020]', JSON.stringify(Object.fromEntries(Object.entries(m).map(([k, v]) => [k, Math.round(v * 1000) / 1000]))));
+    expect(m.goals).toBeGreaterThanOrEqual(2.3);
+    expect(m.goals).toBeLessThanOrEqual(3.4);
+    for (const v of [m.shots2001, m.shots2020]) {
+      expect(v).toBeGreaterThanOrEqual(9);
+      expect(v).toBeLessThanOrEqual(18);
+    }
+    expect(m.win2001).toBeLessThanOrEqual(0.55);
+    expect(m.win2020).toBeLessThanOrEqual(0.55);
+    expect(m.draw).toBeGreaterThanOrEqual(0.18);
+    expect(m.draw).toBeLessThanOrEqual(0.32);
+  });
+
+  it('beide Spielstile bleiben sichtbar', () => {
+    const s = {
+      poss2020: per(({ r, b }) => r.stats[b].possession),
+      highTO2020: per(({ r, b }) => highTurnovers(r, b)),
+      highTO2001: per(({ r, a }) => highTurnovers(r, a)),
+      cross2001: per(({ r, a }) => crosses(r, a)),
+      cross2020: per(({ r, b }) => crosses(r, b)),
+      fouls2001: per(({ r, a }) => r.stats[a].fouls),
+      fouls2020: per(({ r, b }) => r.stats[b].fouls),
+    };
+    console.log('[Stil Bayern 2001–2020]', JSON.stringify(Object.fromEntries(Object.entries(s).map(([k, v]) => [k, Math.round(v * 100) / 100]))));
+    expect(s.poss2020).toBeGreaterThan(50);
+    expect(s.highTO2020).toBeGreaterThan(s.highTO2001 * 1.3);
+    expect(s.cross2001).toBeGreaterThan(s.cross2020);
+    expect(s.fouls2001).toBeGreaterThan(s.fouls2020 * 1.3);
+  });
+
+  it('Niveau-Invarianz: +8 auf alle Werte beider Teams ändert die Torzahl kaum', () => {
+    const base = per(({ r }) => r.score.home + r.score.away);
+    const up = [
+      ...run(raiseTeam(BAYERN_2001, 8), raiseTeam(BAYERN_2020, 8), N, 60_000),
+      ...run(raiseTeam(BAYERN_2020, 8), raiseTeam(BAYERN_2001, 8), N, 70_000),
+    ];
+    const raised = avg(up.map((r) => r.score.home + r.score.away));
+    console.log('[Niveau-Invarianz] Tore normal/+8', base.toFixed(3), raised.toFixed(3));
+    expect(Math.abs(raised - base)).toBeLessThan(0.4);
   });
 });

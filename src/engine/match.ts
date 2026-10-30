@@ -34,9 +34,10 @@ import {
   type Line,
   type TeamStrength,
 } from './strength';
-import { clamp, dist, distToGoal, goalAngle, inBox, logistic, logit, r2, PITCH_LENGTH, PITCH_WIDTH } from './math';
+import { clamp, dist, distToGoal, goalAngle, inBox, logistic, logit, r2, softsign, PITCH_LENGTH, PITCH_WIDTH } from './math';
 import { foulFactor, redPerFoul, yellowPerFoul } from './rules';
 import { ENGINE_VERSION } from './version';
+import { computeLevelShift, shiftPlayer, type LevelShift } from './normalize';
 import { computeMomentum, computeRatings } from './postmatch';
 
 export interface SimulateOptions {
@@ -57,7 +58,7 @@ export const P = {
   foulPerStep: 0.0105,
   foulOnFailedDribble: 0.32,
   shotWeight: 0.55,
-  xgBase: -1.1,
+  xgBase: -1.2,
   xgDist: 0.11,
   xgAngle: 1.5,
   holdMin: 3.0,
@@ -95,6 +96,29 @@ const DEFAULT_ROLE: Record<Position, Role> = {
   ST: 'poacher',
 };
 const LINE_IDX: Record<Line, number> = { gk: 0, def: 1, mid: 2, att: 3 };
+/** Flankenneigung je Rolle (Schienenspieler und Außenmittelfeld flanken am meisten) */
+const CROSS_ROLE: Record<Role, number> = {
+  goalkeeper: 0,
+  sweeper: 0.5,
+  stopper: 0.5,
+  'centre-back': 0.5,
+  'ball-playing-cb': 0.6,
+  'full-back': 0.9,
+  'wing-back': 1.6,
+  'inverted-full-back': 0.5,
+  'holding-mid': 0.7,
+  'deep-playmaker': 0.8,
+  'box-to-box': 0.8,
+  'advanced-playmaker': 0.8,
+  'shadow-striker': 0.6,
+  'wide-mid': 1.4,
+  winger: 1.0,
+  'inside-forward': 0.5,
+  'target-man': 0.6,
+  poacher: 0.5,
+  'complete-forward': 0.7,
+  'false-nine': 0.6,
+};
 
 /** Umrechnung absolute ↔ Team-Koordinaten (Gast: um 180° gedreht). Selbstinvers. */
 function tc(side: TeamSide, v: Vec2): Vec2 {
@@ -190,6 +214,8 @@ class MatchSim {
   lastStrengthMinute = -1;
   lastFatigueT = 0;
   halfCounts = { goals: 0, subs: 0, cards: 0, fouls: 0, pens: 0 };
+  /** Niveau-Normierung (siehe normalize.ts) */
+  readonly shift: LevelShift;
 
   constructor(
     readonly home: TeamSheet,
@@ -203,6 +229,7 @@ class MatchSim {
     this.rTime = root.fork('time');
     this.rCoach = root.fork('coach');
     this.rRef = root.fork('referee');
+    this.shift = computeLevelShift(home, away);
     this.teams = { home: this.initTeam('home', home), away: this.initTeam('away', away) };
   }
 
@@ -211,7 +238,7 @@ class MatchSim {
   private findPlayer(sheet: TeamSheet, id: string): Player {
     const p = sheet.players.find((q) => q.id === id) ?? sheet.bench.find((q) => q.id === id);
     if (!p) throw new Error(`Spieler ${id} nicht in ${sheet.id} gefunden`);
-    return p;
+    return shiftPlayer(p, this.shift, sheet.id);
   }
 
   private newPS(side: TeamSide, player: Player, slot: LineupSlot, tac: Tactic, onT: number): PS {
@@ -255,7 +282,7 @@ class MatchSim {
     const tac: Tactic = { ...sheet.tactic };
     const on = sheet.lineup.map((slot) => this.newPS(side, this.findPlayer(sheet, slot.playerId), { ...slot }, tac, 0));
     const startIds = new Set(sheet.lineup.map((s) => s.playerId));
-    const bench = sheet.bench.filter((p) => !startIds.has(p.id));
+    const bench = sheet.bench.filter((p) => !startIds.has(p.id)).map((p) => shiftPlayer(p, this.shift, sheet.id));
     const ts: TS = {
       side,
       sheet,
@@ -641,7 +668,7 @@ class MatchSim {
     let wCross = 0;
     const wideRole = c.slot.role === 'wing-back' || c.slot.role === 'wide-mid' || c.slot.role === 'full-back';
     const crossFrom = wideRole ? 60 : 66;
-    if (!isGk && bT.x > crossFrom && wide) wCross = 1.3 * clamp(4 * tac.crossingFocus - 1.2, 0.15, 2) * (0.5 + this.a(c, 'crossing') / 140) * (wideRole ? 1.15 : c.slot.role === 'inside-forward' ? 0.5 : 1);
+    if (!isGk && bT.x > crossFrom && wide) wCross = 1.3 * clamp(4 * tac.crossingFocus - 1.2, 0.15, 2) * (0.5 + this.a(c, 'crossing') / 140) * CROSS_ROLE[c.slot.role];
     else if (!isGk && bT.x > 78 && Math.abs(bT.y - 34) > 9) wCross = 0.35 * clamp(4 * tac.crossingFocus - 1.2, 0.15, 2);
     let wCarry = isGk ? 0 : 0.45 + 0.6 * (1 - Math.min(1, press)) + (counter ? 1.5 : 0);
     let wDrib = 0;
@@ -936,8 +963,8 @@ class MatchSim {
     const r = cands.length ? cands[this.rng.weightedIndex(ws)]! : c;
     const skill = setPiece ? A.str.setPiece * 0.7 + this.a(c, 'crossing') * 0.3 : this.a(c, 'crossing');
     const aerDiff = aerialScore(r.player, r.fatigue) - B.str.aerialDef;
-    let lg = P.crossBase + (skill - 70) / 14 + (low ? (this.a(r, 'positioning') - this.teamDefAvg(B)) / 16 : aerDiff / 13) + this.ha(A.side);
-    if (setPiece) lg -= 0.1;
+    let lg = P.crossBase + (skill - 70) / 14 + (low ? (this.a(r, 'positioning') - this.teamDefAvg(B)) / 16 : softsign(aerDiff / 13)) + this.ha(A.side);
+    if (setPiece) lg -= 0.35;
     if (this.flags.counter > 0) lg += 0.4;
     const p = logistic(lg);
     const fromAbs = this.ball;
@@ -1043,7 +1070,10 @@ class MatchSim {
     else if (d > 20) skill = 0.7 * this.a(s, 'longShots') + 0.3 * this.a(s, 'composure');
     else skill = 0.65 * this.a(s, 'finishing') + 0.35 * this.a(s, 'composure');
     const gkSkill = 0.5 * this.a(gk, 'gkReflexes') + 0.3 * this.a(gk, 'gkPositioning') + 0.2 * this.a(gk, 'gkHandling');
-    const pg = logistic(logit(xg) + (skill - 72) / 17 - (gkSkill - 72) / 19 + this.ha(A.side));
+    // Fähigkeitseinfluss gesättigt (softsign), damit Extremwerte (95–99) keine Torgarantie werden
+    const skillTerm = 1.3 * softsign((skill - 72) / (ctx.header ? 26 : 22));
+    const gkTerm = 1.3 * softsign((gkSkill - 72) / 25);
+    const pg = logistic(logit(xg) + skillTerm - gkTerm + this.ha(A.side));
     let pBlock = ctx.header || ctx.penalty ? 0.03 : ctx.through ? 0.06 : clamp(0.1 + 0.011 * (d - 8) + (ctx.pressure ?? 0.4) * 0.12, 0.05, 0.42);
     if (ctx.freeKick) pBlock = 0.25;
     const type: EventType = ctx.header ? 'header' : 'shot';
@@ -1317,7 +1347,7 @@ class MatchSim {
           this.shoot(A, B, taker, spotT, { freeKick: true, pressure: 0.3 });
           return;
         }
-        if (spotT.x > 68) {
+        if (spotT.x > 68 && (spotT.x > 82 || this.rng.chance(0.5))) {
           const taker = this.setPieceTaker(A, A.tac.freeKickTakers, 'crossing');
           this.carrier = taker;
           this.cross(A, B, taker, spotT, 'free-kick');

@@ -61,7 +61,39 @@ Testteams in `tests/fixtures/teams.ts` (frei erfunden): Pressing 4-2-3-1 (2020),
 - Ecken und Abstöße entstehen nur aus bestimmten Situationen (Block, Parade, geklärte Flanke, Grätsche an der Grundlinie). Abgefälschte Pässe gibt es nicht.
 - Doppelte Unterzahl, Verletzungen, Elfmeterschießen und Verlängerung fehlen.
 - Die Spielnoten-Normierung (`LINE_MEAN`/`LINE_SD` in `postmatch.ts`) ist auf die Testteams kalibriert. Bei echten Teams nachprüfen.
-- Die Testteams sind synthetisch. Die Kalibrierung muss mit den echten Bayern-2001/2020-Datensätzen wiederholt werden.
+- Die Testteams sind synthetisch. Die Kalibrierung muss mit den echten Bayern-2001/2020-Datensätzen wiederholt werden. (Erledigt in 0.2.0, siehe unten.)
+
+## Engine 0.2.0 – Kalibrierung mit echten Mannschaften (Niveau-Invarianz)
+
+### Problem
+Bayern 2001 gegen Bayern 2020 ergab ≈ 5,4 Tore pro Spiel, und 2020 gewann 66 % (Messung über 200 Spiele: 2001 17,5 % / Remis 16 % / 2020 66,5 %, 17 bzw. 25 Schüsse). Ursache: Die Formeln vergleichen Fähigkeiten mit festen Ankern (z. B. `(skill − 72)/17`, `(skill − 70)/14`). Echte Werte liegen bei 79–84 im Schnitt (Testteams 63–68) und sind anders geformt: Abschluss 69/83 gegenüber 55, Flanken 72/86 gegenüber 60. Dadurch wurde jede Chance zu einer Großchance. Außerdem lag der Abstand der Einzelwerte zwischen beiden Teams bei 5,4 Punkten, der der Gesamtwerte (overall) aber nur bei 3,4. Daher kam die zu große Überlegenheit von 2020.
+
+### Lösung (`src/engine/normalize.ts`)
+1. **Mannschafts-Ausgleich:** Pro Spiel wird jede Mannschaft einheitlich verschoben, sodass der Abstand ihrer mittleren Feldspieler-Attribute dem Abstand der mittleren overall-Werte entspricht. Overall ist der kuratierte Gesamtwert aus mehreren Quellen. Das Profil innerhalb eines Teams bleibt unverändert.
+2. **Gemeinsame Verschiebung je Attribut:** Beide Mannschaften werden um denselben Betrag je Attribut verschoben, bis ihr gemeinsamer Mittelwert dem Referenzprofil `REF_PROFILE` entspricht (Mittel der Kalibrier-Teams, Torwartwerte 80). Damit zählt nur noch die relative Stärke. Ein einheitliches +8 auf beide Teams ändert exakt nichts.
+3. Torabschluss: Der Einfluss von Schütze und Torwart ist jetzt mit `softsign` gesättigt, sodass Extremwerte von 95–99 keine Torgarantie mehr bedeuten. Bei Flanken ist der Kopfballvorteil gesättigt, Standardflanken sind schwerer (−0,35), und Freistöße zwischen x = 68 und 82 werden nur noch zur Hälfte geflankt.
+4. Flankenneigung je Rolle (`CROSS_ROLE`): Schienenspieler 1,6, Außenmittelfeld 1,4, Inside-Forward 0,5.
+5. `xgBase` −1,1 → −1,2. Die Testmannschaft „Schwach“ hat jetzt Werte −6, damit Attribute und overall zusammenpassen.
+
+### Vorher / nachher (Bayern 2001 – Bayern 2020, Heim/Gast gemischt)
+
+| Wert | 0.1.0 | 0.2.0 (Test, 300 Spiele) | Ziel |
+|---|---|---|---|
+| Tore pro Spiel | 5,38 | 2,78 | 2,3–3,4 |
+| Schüsse 2001 / 2020 | 17,3 / 24,7 | 11,5 / 12,9 | 9–18 |
+| Siege 2001 / Remis / Siege 2020 | 17,5 / 16 / 66,5 % | 31,3 / 27,0 / 41,7 % | max. 55 %, Remis 18–32 % |
+| Ballbesitz 2020 | 52,7 % | 52,8 % | > 50 % |
+| hohe Ballgewinne 2020 / 2001 | – | 13,7 / 3,0 | 2020 deutlich mehr |
+| Flanken 2001 / 2020 | 12,8 / 14,2 | 13,3 / 11,5 | 2001 mehr |
+| Fouls 2001 / 2020 | 14,8 / 6,7 | 16,5 / 6,5 | 2001 mehr |
+| Niveau-Invarianz (+8 auf alle Werte) | 5,38 → 6,09 Tore | 2,78 → 2,75 Tore | Δ < 0,4 |
+
+Testteams (0.2.0): Tore 2,54, Schüsse 11,1 / 9,7, aufs Tor 4,2 / 3,6, Ecken 5,8 / 5,6, Gelb 3,8, Pässe 364 / 354, Passquote 80 / 79 %, Ballbesitz Heim 50,9 %, Favorit gewinnt 69,3 %. Alle Korridore eingehalten. Spiegelduelle: 2001 gegen 2001 ≈ 3,8 Tore, 2020 gegen 2020 ≈ 2,6 Tore.
+
+### Offene Punkte
+- Ein Spiegelduell 2001 gegen 2001 ergibt viele Tore (≈ 3,8): Flanken und Kopfbälle beider Teams treffen auf Manndecker. Das ist noch nicht durch einen Test abgedeckt.
+- Die Normierung hängt vom overall-Wert in den Mannschaftsdateien ab. Falsche overall-Werte verschieben die Stärkeverhältnisse direkt.
+- Einwechselspieler werden mit der Verschiebung ihrer Mannschaft normiert.
 
 ## 30.10.2026 – F02: 2D-Testansicht mit TV-Einblendungen (Viewer)
 

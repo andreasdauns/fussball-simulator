@@ -225,7 +225,7 @@ export function sweeperTeam(opts: { era?: number; delta?: number; id?: string } 
   });
 }
 
-/** 4-4-2, klar schwächer (alle Werte −5) */
+/** 4-4-2, klar schwächer (alle Werte −6) */
 export function weakTeam(opts: { era?: number; delta?: number; id?: string } = {}): TeamSheet {
   return buildTeam({
     id: opts.id ?? 'test-weak',
@@ -233,7 +233,7 @@ export function weakTeam(opts: { era?: number; delta?: number; id?: string } = {
     shortName: 'Schwach',
     season: '2019/20',
     era: opts.era ?? 2020,
-    delta: opts.delta ?? -5,
+    delta: opts.delta ?? -6,
     tactic: {
       formation: '4-4-2',
       pressingHeight: 0.4,

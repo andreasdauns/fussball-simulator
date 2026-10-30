@@ -1,26 +1,272 @@
 {
   "hinweis": "Backlog für selbstständige Läufe. Pro Lauf genau eine Aufgabe (erste mit status 'todo', deren depends erledigt sind). Status nur auf 'done' setzen, wenn alle Abnahmekriterien geprüft sind. Andreas' FEEDBACK.md hat Vorrang.",
   "features": [
-    { "id": "F00", "phase": 0, "titel": "Projektgerüst, Tests, CI", "status": "done", "depends": [], "abnahme": ["typecheck, test, build grün", "CLAUDE.md, Skills vorhanden"] },
-    { "id": "F01", "phase": 1, "titel": "Simulations-Engine v0 (deterministisch, kalibriert)", "status": "in-progress", "depends": ["F00"], "abnahme": ["Determinismus-Tests grün", "Kalibrier-Korridore grün", "Taktikunterschiede (hohes Pressing vs. tiefer Block) messbar"] },
-    { "id": "F02", "phase": 1, "titel": "2D-Testansicht mit TV-Einblendungen", "status": "in-progress", "depends": ["F00"], "abnahme": ["Spiel läuft von Anpfiff bis Abpfiff", "Anzeigetafel, Tor-Einblendung, Statistik zur Halbzeit", "build:single erzeugt eine Datei"] },
-    { "id": "F03", "phase": 1, "titel": "Mannschaften Bayern 2000/01 und Bayern 2019/20 mit Taktik und Trainer", "status": "in-progress", "depends": ["F01"], "abnahme": ["Startelf/Bank wie in den CL-Finals", "Formation und Taktikwerte mit Quellen", "Spielerwerte gemäß Skill player-rating-rubric mit Quellen und confidence"] },
-    { "id": "F04", "phase": 1, "titel": "Vorschau-Veröffentlichung (Einzeldatei-Link) und Deployment-Workflow", "status": "todo", "depends": ["F02"], "abnahme": ["Andreas kann das Spiel per Link auf Handy/Laptop öffnen"] },
-    { "id": "F05", "phase": 1, "titel": "Bayern-Spielerstamm 1950–heute (Signale + Werte)", "status": "todo", "depends": ["F03"], "abnahme": ["Alle Spieler mit Position, Jahren, Einsätzen", "kicker-Rangliste zugeordnet", "Werte für Kernspieler (≥30 Spiele) mit Quellen"] },
-    { "id": "F06", "phase": 1, "titel": "Weitere Bayern-Mannschaften: 1974, 1976, 1987, 1999, 2013, 2025", "status": "todo", "depends": ["F05"], "abnahme": ["TeamSheets mit Taktik und Trainer", "Auswahl im Menü"] },
-    { "id": "F07", "phase": 1, "titel": "Elf-Baukasten: eigene Mannschaft aus allen Bayern-Epochen", "status": "todo", "depends": ["F05"], "abnahme": ["Formation wählen, Spieler je Position aus Liste wählen, Trainer wählen", "Speichern im Browser"] },
-    { "id": "F10", "phase": 2, "titel": "3D-Szene: Rasen mit Mähstreifen, Linien, Tore, Flutlicht, einfaches Stadion", "status": "todo", "depends": ["F02"], "abnahme": ["Läuft im Browser mit 60 fps auf Laptop", "Qualitätsstufe Niedrig für Handy"] },
-    { "id": "F11", "phase": 2, "titel": "3D-Platzhalterfiguren und Ball aus positions.ts", "status": "todo", "depends": ["F10"], "abnahme": ["Gleiche Positionen wie 2D", "Ballflug mit Höhe"] },
-    { "id": "F12", "phase": 2, "titel": "TV-Bildregie: Führungskamera, Schnitte bei Toren/Standards", "status": "todo", "depends": ["F11"], "abnahme": ["Totale folgt dem Ball weich", "Andreas bestätigt TV-Gefühl"] },
-    { "id": "F13", "phase": 2, "titel": "TV-Grafiken im 3D-Modus (Anzeigetafel, Aufstellung, Wechsel, Statistik)", "status": "todo", "depends": ["F12"], "abnahme": ["Einblendungen wie in 2D, im TV-Stil"] },
-    { "id": "F14", "phase": 2, "titel": "Trainerfiguren an der Seitenlinie mit Namensschild", "status": "todo", "depends": ["F11"], "abnahme": ["Hitzfeld/Flick sichtbar, reagieren auf Tore"] },
-    { "id": "F20", "phase": 3, "titel": "Animierte Spielerfiguren (Mixamo/Quaternius), Trikotfarben, Nummern", "status": "todo", "depends": ["F12"], "abnahme": ["Lizenzen in CREDITS.md", "Lauf-Animation passend zur Geschwindigkeit"] },
-    { "id": "F21", "phase": 3, "titel": "Aktionsanimationen: Pass, Schuss, Kopfball, Grätsche, Paraden, Jubel", "status": "todo", "depends": ["F20"], "abnahme": ["Ballkontakt zeitlich passend", "Andreas-Feedback eingearbeitet"] },
-    { "id": "F30", "phase": 4, "titel": "Zuschauer (Instancing) und Stadionton, Lautstärke nach Spielsituation", "status": "todo", "depends": ["F12"], "abnahme": ["Nur lizenzfreie Sounds, in CREDITS.md"] },
-    { "id": "F31", "phase": 4, "titel": "Torwiederholungen in Zeitlupe aus zweiter Kamera", "status": "todo", "depends": ["F12"], "abnahme": ["Nach jedem Tor automatische Wiederholung"] },
-    { "id": "F32", "phase": 4, "titel": "Zeitraffer- und Highlight-Modus", "status": "todo", "depends": ["F12"], "abnahme": ["90 Min in ca. 12 Min; Highlights in ca. 3 Min"] },
-    { "id": "F40", "phase": 5, "titel": "Gemeinsam schauen per Link (Supabase-Gratistarif)", "status": "todo", "depends": ["F32"], "abnahme": ["Mehrere Geräte zeigen dasselbe Spiel synchron", "0 € Kosten"] },
-    { "id": "F41", "phase": 5, "titel": "Bayern 1950–1964 bewerten und ergänzen", "status": "todo", "depends": ["F05"], "abnahme": ["Werte mit confidence und Quellen"] },
-    { "id": "F42", "phase": 5, "titel": "Turniermodus: Bayern-Generationen-Pokal", "status": "todo", "depends": ["F06"], "abnahme": ["K.-o.-Turnier mit 8 Mannschaften"] }
+    {
+      "id": "F00",
+      "phase": 0,
+      "titel": "Projektgerüst, Tests, CI",
+      "status": "done",
+      "depends": [],
+      "abnahme": [
+        "typecheck, test, build grün",
+        "CLAUDE.md, Skills vorhanden"
+      ]
+    },
+    {
+      "id": "F01",
+      "phase": 1,
+      "titel": "Simulations-Engine v0 (deterministisch, kalibriert)",
+      "status": "done",
+      "depends": [
+        "F00"
+      ],
+      "abnahme": [
+        "Determinismus-Tests grün",
+        "Kalibrier-Korridore grün",
+        "Taktikunterschiede (hohes Pressing vs. tiefer Block) messbar"
+      ]
+    },
+    {
+      "id": "F02",
+      "phase": 1,
+      "titel": "2D-Testansicht mit TV-Einblendungen",
+      "status": "done",
+      "depends": [
+        "F00"
+      ],
+      "abnahme": [
+        "Spiel läuft von Anpfiff bis Abpfiff",
+        "Anzeigetafel, Tor-Einblendung, Statistik zur Halbzeit",
+        "build:single erzeugt eine Datei"
+      ]
+    },
+    {
+      "id": "F03",
+      "phase": 1,
+      "titel": "Mannschaften Bayern 2000/01 und Bayern 2019/20 mit Taktik und Trainer",
+      "status": "done",
+      "depends": [
+        "F01"
+      ],
+      "abnahme": [
+        "Startelf/Bank wie in den CL-Finals",
+        "Formation und Taktikwerte mit Quellen",
+        "Spielerwerte gemäß Skill player-rating-rubric mit Quellen und confidence"
+      ]
+    },
+    {
+      "id": "F04",
+      "phase": 1,
+      "titel": "Vorschau-Veröffentlichung (Einzeldatei-Link) und Deployment-Workflow",
+      "status": "todo",
+      "depends": [
+        "F02"
+      ],
+      "abnahme": [
+        "Andreas kann das Spiel per Link auf Handy/Laptop öffnen"
+      ]
+    },
+    {
+      "id": "F05",
+      "phase": 1,
+      "titel": "Bayern-Spielerstamm 1950–heute (Signale + Werte)",
+      "status": "todo",
+      "depends": [
+        "F03"
+      ],
+      "abnahme": [
+        "Alle Spieler mit Position, Jahren, Einsätzen",
+        "kicker-Rangliste zugeordnet",
+        "Werte für Kernspieler (≥30 Spiele) mit Quellen"
+      ]
+    },
+    {
+      "id": "F06",
+      "phase": 1,
+      "titel": "Weitere Bayern-Mannschaften: 1974, 1976, 1987, 1999, 2013, 2025",
+      "status": "todo",
+      "depends": [
+        "F05"
+      ],
+      "abnahme": [
+        "TeamSheets mit Taktik und Trainer",
+        "Auswahl im Menü"
+      ]
+    },
+    {
+      "id": "F07",
+      "phase": 1,
+      "titel": "Elf-Baukasten: eigene Mannschaft aus allen Bayern-Epochen",
+      "status": "todo",
+      "depends": [
+        "F05"
+      ],
+      "abnahme": [
+        "Formation wählen, Spieler je Position aus Liste wählen, Trainer wählen",
+        "Speichern im Browser"
+      ]
+    },
+    {
+      "id": "F10",
+      "phase": 2,
+      "titel": "3D-Szene: Rasen mit Mähstreifen, Linien, Tore, Flutlicht, einfaches Stadion",
+      "status": "todo",
+      "depends": [
+        "F02"
+      ],
+      "abnahme": [
+        "Läuft im Browser mit 60 fps auf Laptop",
+        "Qualitätsstufe Niedrig für Handy"
+      ]
+    },
+    {
+      "id": "F11",
+      "phase": 2,
+      "titel": "3D-Platzhalterfiguren und Ball aus positions.ts",
+      "status": "todo",
+      "depends": [
+        "F10"
+      ],
+      "abnahme": [
+        "Gleiche Positionen wie 2D",
+        "Ballflug mit Höhe"
+      ]
+    },
+    {
+      "id": "F12",
+      "phase": 2,
+      "titel": "TV-Bildregie: Führungskamera, Schnitte bei Toren/Standards",
+      "status": "todo",
+      "depends": [
+        "F11"
+      ],
+      "abnahme": [
+        "Totale folgt dem Ball weich",
+        "Andreas bestätigt TV-Gefühl"
+      ]
+    },
+    {
+      "id": "F13",
+      "phase": 2,
+      "titel": "TV-Grafiken im 3D-Modus (Anzeigetafel, Aufstellung, Wechsel, Statistik)",
+      "status": "todo",
+      "depends": [
+        "F12"
+      ],
+      "abnahme": [
+        "Einblendungen wie in 2D, im TV-Stil"
+      ]
+    },
+    {
+      "id": "F14",
+      "phase": 2,
+      "titel": "Trainerfiguren an der Seitenlinie mit Namensschild",
+      "status": "todo",
+      "depends": [
+        "F11"
+      ],
+      "abnahme": [
+        "Hitzfeld/Flick sichtbar, reagieren auf Tore"
+      ]
+    },
+    {
+      "id": "F20",
+      "phase": 3,
+      "titel": "Animierte Spielerfiguren (Mixamo/Quaternius), Trikotfarben, Nummern",
+      "status": "todo",
+      "depends": [
+        "F12"
+      ],
+      "abnahme": [
+        "Lizenzen in CREDITS.md",
+        "Lauf-Animation passend zur Geschwindigkeit"
+      ]
+    },
+    {
+      "id": "F21",
+      "phase": 3,
+      "titel": "Aktionsanimationen: Pass, Schuss, Kopfball, Grätsche, Paraden, Jubel",
+      "status": "todo",
+      "depends": [
+        "F20"
+      ],
+      "abnahme": [
+        "Ballkontakt zeitlich passend",
+        "Andreas-Feedback eingearbeitet"
+      ]
+    },
+    {
+      "id": "F30",
+      "phase": 4,
+      "titel": "Zuschauer (Instancing) und Stadionton, Lautstärke nach Spielsituation",
+      "status": "todo",
+      "depends": [
+        "F12"
+      ],
+      "abnahme": [
+        "Nur lizenzfreie Sounds, in CREDITS.md"
+      ]
+    },
+    {
+      "id": "F31",
+      "phase": 4,
+      "titel": "Torwiederholungen in Zeitlupe aus zweiter Kamera",
+      "status": "todo",
+      "depends": [
+        "F12"
+      ],
+      "abnahme": [
+        "Nach jedem Tor automatische Wiederholung"
+      ]
+    },
+    {
+      "id": "F32",
+      "phase": 4,
+      "titel": "Zeitraffer- und Highlight-Modus",
+      "status": "todo",
+      "depends": [
+        "F12"
+      ],
+      "abnahme": [
+        "90 Min in ca. 12 Min; Highlights in ca. 3 Min"
+      ]
+    },
+    {
+      "id": "F40",
+      "phase": 5,
+      "titel": "Gemeinsam schauen per Link (Supabase-Gratistarif)",
+      "status": "todo",
+      "depends": [
+        "F32"
+      ],
+      "abnahme": [
+        "Mehrere Geräte zeigen dasselbe Spiel synchron",
+        "0 € Kosten"
+      ]
+    },
+    {
+      "id": "F41",
+      "phase": 5,
+      "titel": "Bayern 1950–1964 bewerten und ergänzen",
+      "status": "todo",
+      "depends": [
+        "F05"
+      ],
+      "abnahme": [
+        "Werte mit confidence und Quellen"
+      ]
+    },
+    {
+      "id": "F42",
+      "phase": 5,
+      "titel": "Turniermodus: Bayern-Generationen-Pokal",
+      "status": "todo",
+      "depends": [
+        "F06"
+      ],
+      "abnahme": [
+        "K.-o.-Turnier mit 8 Mannschaften"
+      ]
+    }
   ]
 }
