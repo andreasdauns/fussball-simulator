@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "calibrate": "vitest run tests/calibration.test.ts"
+    "calibrate": "vitest run tests/calibration.test.ts",
+    "check:single": "node scripts/check-single.cjs"
   },
   "dependencies": {
     "three": "^0.187.0"

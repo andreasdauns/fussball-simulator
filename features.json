@@ -1,5 +1,5 @@
 {
-  "hinweis": "Backlog für selbstständige Läufe. Pro Lauf genau eine Aufgabe (erste mit status 'todo', deren depends erledigt sind). Status nur auf 'done' setzen, wenn alle Abnahmekriterien geprüft sind. Andreas' FEEDBACK.md hat Vorrang.",
+  "hinweis": "Backlog für selbstständige Läufe. Pro Lauf genau eine Aufgabe (erste mit status 'todo', deren depends erledigt sind). Status nur auf 'done' setzen, wenn alle Abnahmekriterien geprüft sind. Andreas' FEEDBACK.md hat Vorrang. Status 'in_pruefung' = umgesetzt, wartet auf Andreas' Abnahme oder Entscheidung; nicht erneut bearbeiten, solange FEEDBACK.md nichts Neues sagt.",
   "features": [
     {
       "id": "F00",
@@ -58,13 +58,14 @@
       "id": "F04",
       "phase": 1,
       "titel": "Vorschau-Veröffentlichung (Einzeldatei-Link) und Deployment-Workflow",
-      "status": "todo",
+      "status": "in_pruefung",
       "depends": [
         "F02"
       ],
       "abnahme": [
         "Andreas kann das Spiel per Link auf Handy/Laptop öffnen"
-      ]
+      ],
+      "notiz": "31.10.2026: Einzeldatei wird bei jedem CI-Lauf gebaut und als Artifact hochgeladen, Stand-Anzeige, Prüfskript check:single. Abnahme (Link auf Handy) offen: braucht Andreas’ Entscheidung zum Hosting (siehe docs/VORSCHAU.md)."
     },
     {
       "id": "F05",

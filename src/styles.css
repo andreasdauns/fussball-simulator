@@ -104,6 +104,11 @@ button {
   color: var(--muted);
 }
 
+.brand small.stamp {
+  font-size: 11px;
+  opacity: 0.75;
+}
+
 .field {
   display: flex;
   flex-direction: column;

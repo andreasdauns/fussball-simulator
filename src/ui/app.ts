@@ -4,6 +4,7 @@
  */
 
 import type { MatchResult, TeamSheet } from '../engine/types';
+import { ENGINE_VERSION } from '../engine/version';
 import { goalsOf, highlightWindows, statsUntil, type GoalInfo, type HighlightWindow } from '../viewer2d/highlights';
 import { PositionSynth } from '../viewer2d/positions';
 import { PitchRenderer } from '../viewer2d/renderer2d';
@@ -85,7 +86,13 @@ export class ViewerApp {
     const topbar = h(
       'header',
       { class: 'topbar' },
-      h('div', { class: 'brand' }, 'Fußball-Simulator', h('small', {}, 'Simulation – kein echtes Spiel')),
+      h(
+        'div',
+        { class: 'brand' },
+        'Fußball-Simulator',
+        h('small', {}, 'Simulation – kein echtes Spiel'),
+        h('small', { class: 'stamp', title: `Engine ${ENGINE_VERSION}` }, `Stand ${__BUILD_STAMP__}`),
+      ),
       h('label', { class: 'field', for: 'sel-home' }, 'Heim', this.homeSel),
       h('span', { class: 'vs', 'aria-hidden': 'true' }, 'gegen'),
       h('label', { class: 'field', for: 'sel-away' }, 'Gast', this.awaySel),

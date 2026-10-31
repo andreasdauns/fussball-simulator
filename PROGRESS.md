@@ -118,3 +118,17 @@ Testteams (0.2.0): Tore 2,54, Schüsse 11,1 / 9,7, aufs Tor 4,2 / 3,6, Ecken 5,8
 - Highlight-Modus springt hart (kein Überblenden).
 - Google-Font (Barlow Condensed) braucht Internet; offline greift eine Systemschrift.
 - Optik nur per Screenshot geprüft – Andreas' Rückmeldung zum TV-Gefühl fehlt noch.
+
+## 31.10.2026 – F04: Vorschau-Einzeldatei und Auslieferung (Status: in_pruefung)
+
+### Umfang
+- `.github/workflows/ci.yml`: zusätzlich `npm run build:single` und Upload von `dist-single/index.html` als Artifact `fussball-simulator-vorschau` (30 Tage). Kein zusätzlicher Job, kein zweites `npm ci`. `workflow_dispatch` ergänzt. Bei PRs wird der Head-Commit als Stempel genutzt.
+- `vite.config.ts`: `__BUILD_STAMP__` (UTC-Datum + Commit-Kürzel aus `GITHUB_SHA` oder `git rev-parse`; im Testmodus „test“). Anzeige „Stand …“ neben dem Titel, Tooltip mit `ENGINE_VERSION`. Nur Darstellung, Engine unberührt (keine neue ENGINE_VERSION).
+- `scripts/check-single.cjs` (`npm run check:single`): öffnet die Einzeldatei per `file://` in Chromium (1366×820 und 390×844 mobil), prüft Seitenfehler, Hinweis „Simulation“, Canvas, Mannschaftsauswahl; optional Screenshots. Bewusst nicht in CI (Browser-Installation kostet Minuten).
+- `docs/VORSCHAU.md`: Anleitung für Andreas und Übersicht der Hosting-Wege.
+
+### Prüfung
+- typecheck, 55 Tests, build, build:single grün. `check:single`: 0 Fehler in beiden Größen, Stand-Anzeige sichtbar. `dist-single/index.html` ≈ 164 kB (47 kB gzip).
+
+### Offen
+- Abnahme „per Link auf dem Handy“: Artifact-ZIP ist am Handy unpraktisch (Datei-Vorschau führt kein JS aus). Echter Link braucht Hosting-Entscheidung (Kosten/Sichtbarkeit) → Frage im PR. GitHub Pages bei privatem Repo erfordert einen bezahlten Plan.

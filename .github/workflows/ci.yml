@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -18,3 +19,15 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      # Vorschau: das ganze Spiel als eine einzige HTML-Datei.
+      # Erscheint im Lauf unter „Artifacts“ als „fussball-simulator-vorschau“.
+      - run: npm run build:single
+        env:
+          # Bei PRs den Commit des Branches anzeigen, nicht den Merge-Commit.
+          GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fussball-simulator-vorschau
+          path: dist-single/index.html
+          retention-days: 30
+          if-no-files-found: error
