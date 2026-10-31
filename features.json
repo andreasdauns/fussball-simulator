@@ -58,13 +58,14 @@
       "id": "F04",
       "phase": 1,
       "titel": "Vorschau-Veröffentlichung (Einzeldatei-Link) und Deployment-Workflow",
-      "status": "todo",
+      "status": "wartet",
       "depends": [
         "F02"
       ],
       "abnahme": [
         "Andreas kann das Spiel per Link auf Handy/Laptop öffnen"
-      ]
+      ],
+      "notiz": "31.10.2026: Vorbereitet – jeder CI-Lauf liefert die Einzeldatei als privaten Download (docs/VORSCHAU.md). Fester Link braucht Andreas’ Entscheidung (Veröffentlichung/Kosten), daher noch nicht done."
     },
     {
       "id": "F05",

@@ -118,3 +118,17 @@ Testteams (0.2.0): Tore 2,54, Schüsse 11,1 / 9,7, aufs Tor 4,2 / 3,6, Ecken 5,8
 - Highlight-Modus springt hart (kein Überblenden).
 - Google-Font (Barlow Condensed) braucht Internet; offline greift eine Systemschrift.
 - Optik nur per Screenshot geprüft – Andreas' Rückmeldung zum TV-Gefühl fehlt noch.
+
+## 31.10.2026 – F04: Vorschau-Datei über CI (Status „wartet“)
+
+### Umfang
+- `.github/workflows/ci.yml`: zusätzlich `npm run build:single`, Prüfung `scripts/check-single.mjs`, Upload von `dist-single/index.html` als Actions-Artifact `fussball-simulator-vorschau` (30 Tage, privat). Außerdem `workflow_dispatch` für manuellen Start.
+- `scripts/check-single.mjs`: genau eine Datei, kein externes `<script src>`, externe `<link>` nur Google Fonts, Hinweis „Simulation“ vorhanden, < 5 MB.
+- `docs/VORSCHAU.md`: Anleitung für Andreas (Download, Öffnen auf iPhone/Android) und Optionen für einen festen Link.
+
+### Prüfung
+- typecheck, 55 Tests, build, build:single grün; `check-single`: ok (160 kB).
+- `dist-single/index.html` per `file://` in Headless-Chromium geladen (1280×720 und 390×844): läuft, Aufstellung und Spielfeld sichtbar; einziger Fehler ist die nicht erreichbare Google-Schrift (erwartet, Systemschrift greift).
+
+### Warum nicht „done“
+- Abnahme verlangt einen Link. Ein Link heißt Veröffentlichung im Internet; GitHub Pages für private Repositories kostet (Pro), Alternativen (Cloudflare Pages/Netlify) sind öffentlich erreichbar. Beides ist Andreas' Entscheidung (CLAUDE.md Regeln 9/10). Status `wartet`, Frage im PR.
