@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -18,3 +19,13 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      # Vorschau: das ganze Spiel als eine einzige HTML-Datei.
+      # Bleibt privat (nur für Personen mit Zugriff auf das Repository),
+      # wird nicht veröffentlicht und verursacht keine Kosten.
+      - run: npm run build:single
+      - run: node scripts/check-single.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fussball-simulator-vorschau
+          path: dist-single/index.html
+          retention-days: 30
