@@ -78,7 +78,8 @@
         "Alle Spieler mit Position, Jahren, Einsätzen",
         "kicker-Rangliste zugeordnet",
         "Werte für Kernspieler (≥30 Spiele) mit Quellen"
-      ]
+      ],
+      "notiz": "01.11.2026: blockiert – de.wikipedia.org im nächtlichen Lauf nicht erreichbar (Proxy/Freigabe). Andreas: Domain in den Claude-Einstellungen erlauben oder Lauf tagsüber starten."
     },
     {
       "id": "F06",
@@ -110,14 +111,15 @@
       "id": "F10",
       "phase": 2,
       "titel": "3D-Szene: Rasen mit Mähstreifen, Linien, Tore, Flutlicht, einfaches Stadion",
-      "status": "todo",
+      "status": "review",
       "depends": [
         "F02"
       ],
       "abnahme": [
         "Läuft im Browser mit 60 fps auf Laptop",
         "Qualitätsstufe Niedrig für Handy"
-      ]
+      ],
+      "notiz": "01.11.2026: umgesetzt (PR claude/3d-stadion). Offen: Andreas prüft Bildrate auf Laptop (Anzeige „Bilder/s“) und Handy in „Niedrig“."
     },
     {
       "id": "F11",

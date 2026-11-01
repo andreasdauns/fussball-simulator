@@ -1022,3 +1022,29 @@ button {
     animation: none;
   }
 }
+
+/* ── 3D-Ansicht ── */
+.stage canvas[hidden] {
+  display: none;
+}
+
+.stage.is-3d {
+  background: #0b1524;
+}
+
+.fps-chip {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(6, 12, 20, 0.7);
+  color: #dbe6ee;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  padding: 4px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.seg[hidden] {
+  display: none;
+}

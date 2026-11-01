@@ -118,3 +118,26 @@ Testteams (0.2.0): Tore 2,54, Schüsse 11,1 / 9,7, aufs Tor 4,2 / 3,6, Ecken 5,8
 - Highlight-Modus springt hart (kein Überblenden).
 - Google-Font (Barlow Condensed) braucht Internet; offline greift eine Systemschrift.
 - Optik nur per Screenshot geprüft – Andreas' Rückmeldung zum TV-Gefühl fehlt noch.
+
+## 01.11.2026 – F10: 3D-Szene (Stadion bei Flutlicht)
+
+### Auswahl
+- F04 ist durch den offenen PR #1 abgedeckt.
+- F05 (Spielerstamm 1950–heute) übersprungen: Im unbeaufsichtigten Lauf ist de.wikipedia.org über den Proxy gesperrt (403), und WebFetch braucht eine Freigabe, die nachts niemand erteilen kann. Ohne die beiden Wikipedia-Spielerlisten (ab 1965 und 1945–1965) lässt sich die Grundliste nicht belegt erstellen. Werte aus dem Gedächtnis sind laut Rubrik verboten. Nächster freier Punkt mit erfüllten Abhängigkeiten war F10.
+
+### Umfang
+- `src/viewer3d/geometry.ts` (rein, ohne Three.js/DOM, getestet): Linien als Dreiecke nach Regelmaß (Seiten-/Torauslinien, Mittellinie, Mittelkreis 9,15 m, Anstoß- und Elfmeterpunkte, Straf- und Torraum, Teilkreise nur außerhalb des Strafraums, Eckviertelkreise; Außenkante = Feldmaß), Mähstreifen (18 Streifen längs), Torrahmen (7,32 × 2,44 m, Pfosten 12 cm), Tornetz als Liniensegmente (hinten etwas tiefer hängend), Flutlichtmasten.
+- `src/viewer3d/stadium.ts`: Szene mit wenigen Draw Calls (14, gleiche Materialien zusammengeführt): Rasen-Textur (Canvas, Streifen + deterministische Körnung), Linien (eine Geometrie, Normalen nach oben), Tore, Netze, neutrale Werbebanden (dunkel mit rotem Streifen, keine Logos), Trainerbänke auf der Kameraseite, vier ansteigende Tribünen mit Sitzreihen-Textur, Eckblöcke, Dächer, vier Flutlichtmasten mit Leuchtfeldern. Licht: Himmel/Boden-Licht, Hauptlicht mit Schatten (nur „Hoch“), Gegenlicht. Läuft auch in Node (ohne Texturen) für Tests.
+- `src/viewer3d/renderer3d.ts`: `Stadium3DRenderer` (WebGL2 über Three.js, ACES-Tonemapping, sRGB). Kamera: TV-Position auf der Haupttribüne in Höhe der Mittellinie (27 m hoch, 26 m hinter der Seitenlinie), Bildbreite höchstens 74°; Hochformat zeigt den Mittelbereich. Qualitätsstufen: „Hoch“ = Kantenglättung, Schatten (2048er Schattenkarte), Pixeldichte bis 2, feineres Netz und Rasen; „Niedrig“ = ohne Schatten/Kantenglättung, Pixeldichte 1. `suggestQuality()` wählt auf Touch-Geräten/kleinen Bildschirmen „Niedrig“. Bildraten-Messung (1-s-Mittel).
+- `src/ui/app.ts`: Umschalter 2D/3D und Hoch/Niedrig in der Steuerleiste, Bilder/s-Anzeige unten links im 3D-Modus. Three.js wird erst beim ersten Umschalten geladen (dynamischer Import; im normalen Build eigener Teil, im Einzeldatei-Build eingebettet). URL-Hash merkt Ansicht und Qualität (`&v=3d&q=low`). TV-Einblendungen (Anzeigetafel, Bauchbinden, Tafeln) liegen weiter als HTML über dem Bild.
+- Tests `tests/viewer3d.test.ts` (9): Linien innerhalb des Feldes und symmetrisch, Mittelkreis- und Teilkreis-Maße, nichts außerhalb der Ecken, Mähstreifen lückenlos und abwechselnd, Tormaße und Netzlage, Masten außerhalb, Szene in beiden Stufen mit 10–20 Draw Calls und Schatten nur in „Hoch“, Tribünen umschließen das Feld ohne Punkt auf dem Rasen und steigen nach außen an.
+
+### Messwerte
+- Draw Calls: 14 (beide Stufen). `dist-single/index.html` jetzt ≈ 752 kB (197 kB gzip), vorher 112 kB – Three.js ist eingebettet.
+- Bildrate nur mit Software-Rendering (SwiftShader, ohne Grafikkarte) messbar: 2–18 Bilder/s – nicht aussagekräftig. **60 fps auf echtem Laptop ist ungeprüft**; deshalb F10 auf `review` statt `done`. Die Anzeige „Bilder/s“ im 3D-Modus erlaubt Andreas die Prüfung.
+- Screenshots (Hoch 1280×800, Niedrig 390×844) per Playwright geprüft: Feld, Linien, Tribünen, Masten sichtbar, keine Skriptfehler (nur der bekannte Google-Font-Abruf offline).
+
+### Bekannte Schwächen / nächste Schritte
+- Noch keine Spieler und kein Ball in 3D (F11), Kamera steht still (F12). Tore liegen in der Querformat-Totale knapp außerhalb des Bildes.
+- Tribünen sind leer (Zuschauer: F30), Sitzreihen nur als Textur, keine Nachbearbeitung (Bloom/Glanz der Flutlichter).
+- Engine unverändert (ENGINE_VERSION bleibt), Kalibrierung grün.

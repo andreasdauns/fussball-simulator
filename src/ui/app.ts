@@ -12,6 +12,7 @@ import { clear, h } from './dom';
 import { resolveKits, type Kit } from './kits';
 import { Banners, Scorebug, Ticker } from './overlay';
 import { TimelineBar } from './timelineBar';
+import type { Quality, Stadium3DRenderer } from '../viewer3d/renderer3d';
 
 export type Simulate = (home: TeamSheet, away: TeamSheet, seed: number) => MatchResult;
 
@@ -19,6 +20,7 @@ const SPEEDS = [1, 4, 8, 16, 32] as const;
 const DEFAULT_SPEED = 16;
 
 type SeekKind = 'play' | 'jump' | 'seek';
+type View = '2d' | '3d';
 
 interface Match {
   result: MatchResult;
@@ -64,6 +66,19 @@ export class ViewerApp {
   private precomputeDone = false;
   private dirty = true;
 
+  // 3D-Ansicht (wird erst beim ersten Umschalten geladen)
+  private view: View = '2d';
+  private quality: Quality = 'high';
+  private r3d: Stadium3DRenderer | null = null;
+  private r3dLoading = false;
+  private readonly canvas3d: HTMLCanvasElement;
+  private readonly viewBtns: HTMLButtonElement[] = [];
+  private readonly qualityBtns: HTMLButtonElement[] = [];
+  private readonly qualitySeg: HTMLElement;
+  private readonly fpsChip: HTMLElement;
+  private lastFpsShown = -1;
+  private qualityFromHash = false;
+
   constructor(root: HTMLElement, simulate: Simulate, teams: TeamSheet[], demo: boolean) {
     this.root = root;
     this.simulate = simulate;
@@ -96,12 +111,16 @@ export class ViewerApp {
 
     // Bühne
     this.canvas = h('canvas', { role: 'img', 'aria-label': 'Spielfeld von oben' });
+    this.canvas3d = h('canvas', { class: 'canvas3d', role: 'img', 'aria-label': 'Stadion in 3D', hidden: true });
+    this.fpsChip = h('div', { class: 'fps-chip', hidden: true, title: 'Bilder pro Sekunde' });
     this.board = h('div', { class: 'board', hidden: true });
     this.modeChip = h('div', { class: 'mode-chip', hidden: true });
     this.stage = h(
       'div',
       { class: 'stage' },
       this.canvas,
+      this.canvas3d,
+      this.fpsChip,
       this.scorebug.el,
       this.modeChip,
       this.banners.el,
@@ -134,6 +153,26 @@ export class ViewerApp {
       { class: 'btn toggle', type: 'button', 'aria-pressed': 'false', title: 'Nur Tore und Großchancen, je ca. 10 s Vorlauf', onclick: () => this.toggleHighlights() },
       'Highlights',
     );
+    const viewSeg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Ansicht' });
+    for (const v of ['2d', '3d'] as const) {
+      const b = h(
+        'button',
+        { type: 'button', 'aria-pressed': 'false', title: v === '2d' ? 'Draufsicht' : 'Stadion in 3D (Vorschau, noch ohne Spieler)', onclick: () => this.setView(v) },
+        v === '2d' ? '2D' : '3D',
+      );
+      this.viewBtns.push(b);
+      viewSeg.append(b);
+    }
+    this.qualitySeg = h('div', { class: 'seg', role: 'group', 'aria-label': 'Bildqualität', hidden: true });
+    for (const q of ['high', 'low'] as const) {
+      const b = h(
+        'button',
+        { type: 'button', 'aria-pressed': 'false', title: q === 'high' ? 'Für Laptop: Schatten, Kantenglättung' : 'Für Handy: schneller, einfacher', onclick: () => this.setQuality(q) },
+        q === 'high' ? 'Hoch' : 'Niedrig',
+      );
+      this.qualityBtns.push(b);
+      this.qualitySeg.append(b);
+    }
     const controls = h(
       'section',
       { class: 'controls', 'aria-label': 'Wiedergabe' },
@@ -141,6 +180,8 @@ export class ViewerApp {
       restartBtn,
       seg,
       this.hlBtn,
+      viewSeg,
+      this.qualitySeg,
       h('span', { class: 'spacer' }),
       h('span', { class: 'hint' }, 'Leertaste: Pause · Pfeiltasten: 15 s spulen'),
     );
@@ -162,6 +203,7 @@ export class ViewerApp {
 
     new ResizeObserver(() => {
       this.renderer.resize();
+      this.r3d?.resize();
       this.dirty = true;
     }).observe(this.stage);
     this.renderer.resize();
@@ -180,7 +222,12 @@ export class ViewerApp {
     this.homeSel.value = String(idx(p.home, 0));
     this.awaySel.value = String(idx(p.away, 1));
     this.seedIn.value = String(p.seed ?? 1);
+    if (p.quality) {
+      this.quality = p.quality;
+      this.qualityFromHash = true;
+    }
     this.newMatchFromInputs();
+    if (p.view === '3d') this.setView('3d');
     requestAnimationFrame((t) => this.loop(t));
   }
 
@@ -197,7 +244,7 @@ export class ViewerApp {
     if (!Number.isFinite(seed) || seed < 0) seed = 1;
     this.seedIn.value = String(seed);
     try {
-      history.replaceState(null, '', `#h=${encodeURIComponent(home.id)}&a=${encodeURIComponent(away.id)}&s=${seed}`);
+      history.replaceState(null, '', this.hashFor(home.id, away.id, seed));
     } catch {
       /* z. B. file:// – egal */
     }
@@ -442,26 +489,103 @@ export class ViewerApp {
       // Vorberechnung im Hintergrund, damit späteres Spulen sofort geht
       if (!this.precomputeDone) this.precomputeDone = m.synth.precompute(this.playing ? 400 : 1500);
 
-      if (this.dirty || this.playing) this.render();
+      if (this.dirty || this.playing || this.view === '3d') this.render(now);
       this.banners.tick(now);
     }
     requestAnimationFrame((t) => this.loop(t));
   }
 
-  private render(): void {
+  private render(now = performance.now()): void {
     const m = this.match;
     if (!m) return;
     this.dirty = false;
     const frame = m.synth.frameAt(this.tau);
-    const holder = frame.holder >= 0 ? m.synth.agents[frame.holder] : undefined;
-    this.renderer.draw(frame, { home: m.kits.home, away: m.kits.away, holderName: holder ? holder.shortName : undefined });
+    if (this.view === '3d' && this.r3d) {
+      this.r3d.draw(frame, now);
+      const fps = this.r3d.fps();
+      if (fps !== this.lastFpsShown && fps > 0) {
+        this.lastFpsShown = fps;
+        this.fpsChip.textContent = `${fps} Bilder/s`;
+      }
+    } else {
+      const holder = frame.holder >= 0 ? m.synth.agents[frame.holder] : undefined;
+      this.renderer.draw(frame, { home: m.kits.home, away: m.kits.away, holderName: holder ? holder.shortName : undefined });
+    }
     const tl = m.synth.timeline;
     this.scorebug.update(tl.scoreAt(this.tau), tl.clockAt(this.tau));
   }
 
   // ───────────────────────────── Bedienung ─────────────────────────────
 
+  // ───────────────────────────── 2D / 3D ─────────────────────────────
+
+  private hashFor(home: string, away: string, seed: number): string {
+    let hash = `#h=${encodeURIComponent(home)}&a=${encodeURIComponent(away)}&s=${seed}`;
+    if (this.view === '3d') hash += `&v=3d&q=${this.quality === 'low' ? 'low' : 'high'}`;
+    return hash;
+  }
+
+  private writeHash(): void {
+    const m = this.match;
+    if (!m) return;
+    try {
+      history.replaceState(null, '', this.hashFor(m.result.home.id, m.result.away.id, m.result.seed));
+    } catch {
+      // Hash ist nur Bequemlichkeit
+    }
+  }
+
+  private setView(v: View): void {
+    if (v === '3d' && !this.r3d) {
+      if (this.r3dLoading) return;
+      this.r3dLoading = true;
+      // Three.js erst laden, wenn die 3D-Ansicht gebraucht wird
+      import('../viewer3d/renderer3d')
+        .then((mod) => {
+          if (!this.r3d) {
+            if (!this.qualityFromHash) this.quality = mod.suggestQuality();
+            this.r3d = new mod.Stadium3DRenderer(this.canvas3d, this.quality);
+          }
+          this.r3dLoading = false;
+          this.applyView('3d');
+        })
+        .catch((err: unknown) => {
+          this.r3dLoading = false;
+          this.errorBox.hidden = false;
+          this.errorBox.textContent = `3D-Ansicht konnte nicht starten (${err instanceof Error ? err.message : String(err)}). Die 2D-Ansicht läuft weiter.`;
+        });
+      return;
+    }
+    this.applyView(v);
+  }
+
+  private applyView(v: View): void {
+    this.view = v;
+    this.canvas.hidden = v !== '2d';
+    this.canvas3d.hidden = v !== '3d';
+    this.qualitySeg.hidden = v !== '3d';
+    this.fpsChip.hidden = v !== '3d';
+    this.stage.classList.toggle('is-3d', v === '3d');
+    if (v === '3d') this.r3d?.resize();
+    else this.renderer.resize();
+    this.dirty = true;
+    this.writeHash();
+    this.updateButtons();
+  }
+
+  private setQuality(q: Quality): void {
+    this.quality = q;
+    this.qualityFromHash = true;
+    this.r3d?.setQuality(q);
+    this.lastFpsShown = -1;
+    this.dirty = true;
+    this.writeHash();
+    this.updateButtons();
+  }
+
   private updateButtons(): void {
+    (['2d', '3d'] as const).forEach((v, i) => this.viewBtns[i]?.setAttribute('aria-pressed', String(v === this.view)));
+    (['high', 'low'] as const).forEach((q, i) => this.qualityBtns[i]?.setAttribute('aria-pressed', String(q === this.quality)));
     const playingNow = this.playing;
     this.playBtn.replaceChildren(svgIcon(playingNow ? 'pause' : 'play'));
     this.playBtn.setAttribute('aria-label', playingNow ? 'Pause' : 'Abspielen');
@@ -492,8 +616,8 @@ export class ViewerApp {
   }
 }
 
-function parseHash(): { home?: string; away?: string; seed?: number } {
-  const out: { home?: string; away?: string; seed?: number } = {};
+function parseHash(): { home?: string; away?: string; seed?: number; view?: View; quality?: Quality } {
+  const out: { home?: string; away?: string; seed?: number; view?: View; quality?: Quality } = {};
   const q = new URLSearchParams(location.hash.replace(/^#/, ''));
   const hh = q.get('h');
   const a = q.get('a');
@@ -501,6 +625,9 @@ function parseHash(): { home?: string; away?: string; seed?: number } {
   if (hh) out.home = hh;
   if (a) out.away = a;
   if (s && /^\d+$/.test(s)) out.seed = Number(s);
+  if (q.get('v') === '3d') out.view = '3d';
+  const ql = q.get('q');
+  if (ql === 'low' || ql === 'high') out.quality = ql;
   return out;
 }
 
