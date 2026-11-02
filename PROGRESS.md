@@ -118,3 +118,19 @@ Testteams (0.2.0): Tore 2,54, Schüsse 11,1 / 9,7, aufs Tor 4,2 / 3,6, Ecken 5,8
 - Highlight-Modus springt hart (kein Überblenden).
 - Google-Font (Barlow Condensed) braucht Internet; offline greift eine Systemschrift.
 - Optik nur per Screenshot geprüft – Andreas' Rückmeldung zum TV-Gefühl fehlt noch.
+
+## 02.11.2026 – F05 Teil 1: Spielerstamm-Grundgerüst
+
+### Umfang
+- Typen `RegisterEntry`, `RegisterSeason`, `PlayerRegister` in `src/engine/types.ts` (nur Datenvertrag, Engine-Verhalten unverändert → kein ENGINE_VERSION-Sprung).
+- `src/data/players/register.json`: eine Zeile pro Person (gut diffbar). Felder: Positionen, `bayernFrom/bayernTo`, `leagueApps/leagueGoals` (null = nicht erfasst), `seasons` (Verweis auf TeamSheet + Gesamtwert + Vertrauen), `status`, `sources`. Aktuell 41 Personen (alle Spieler aus bayern-2001/-2020), 0 vollständig.
+- `src/data/players/register.ts`: `findRegisterEntry`, `playersForPosition`, `playersActiveIn` (für F06/F07).
+- `scripts/register.mjs`: `sync` (übernimmt TeamSheets), `check` (Abgleich, Exit 1 bei Abweichung), `import <csv>` (Semikolon-CSV `name;position;von;bis;spiele;tore;quelle`, deutsche Positionskürzel, Zeilen ohne Quelle werden abgelehnt). `REGISTER_PATH` nur für Tests.
+- `tests/register.test.ts` (7): eindeutige Slugs, jeder TeamSheet-Spieler mit Saison/Gesamtwert enthalten, Plausibilität, Status-Regel, Positionssuche, `check`, CSV-Import auf Kopie.
+
+### Warum nicht mehr
+- Fakten (Jahre, Einsätze, Tore) für ~600 Spieler 1950–heute brauchen eine Quelle. In dieser Cloud-Umgebung sind de.wikipedia.org, worldfootball.net, fussballdaten.de und historical-lineups.com gesperrt (Proxy 403); nur npm/PyPI/GitHub erreichbar. Aus dem Gedächtnis auffüllen verbietet die Rubrik. → Frage an Andreas (Domain-Freigabe oder CSV liefern).
+- kicker-Rangliste: `legal-guardrails` verbietet kicker-Rohdaten im Repo, die Abnahme von F05 verlangt aber eine Zuordnung. Bis zur Klärung nicht im Stamm gespeichert (Herleitungen stehen weiterhin in `ratings-2001-2020.md`).
+
+### Prüfung
+- `npm run typecheck`, `npm test` (62 Tests, 5 Dateien), `npm run build` grün.
