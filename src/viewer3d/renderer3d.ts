@@ -1,12 +1,13 @@
 /**
- * 3D-Ansicht (Phase 2, Schritt 1): Stadion bei Flutlicht aus der TV-Führungsposition.
- * Spieler und Ball folgen in F11, Bildregie in F12. Die Ansicht liest nur – sie beeinflusst
+ * 3D-Ansicht (Phase 2): Stadion bei Flutlicht aus der TV-Führungsposition, mit
+ * Platzhalterfiguren und Ball (F11). Bildregie folgt in F12. Die Ansicht liest nur – sie beeinflusst
  * nie das Spiel.
  */
 
 import * as THREE from 'three';
 import type { Frame } from '../viewer2d/positions';
 import { HALF_W } from './geometry';
+import { Figures3D, type KitColors } from './figures';
 import { buildStadium, countDrawCalls, SKY_COLOR, type Quality, type StadiumBuild } from './stadium';
 
 export type { Quality } from './stadium';
@@ -31,6 +32,7 @@ export class Stadium3DRenderer {
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.PerspectiveCamera(40, 16 / 9, 1, 600);
   private stadium: StadiumBuild | null = null;
+  private figures: Figures3D | null = null;
   private quality: Quality;
   private cssW = 0;
   private cssH = 0;
@@ -67,7 +69,13 @@ export class Stadium3DRenderer {
       this.scene.remove(this.stadium.group, ...this.stadium.lights);
       this.stadium.dispose();
     }
+    if (this.figures) {
+      this.scene.remove(this.figures.group);
+      this.figures.dispose();
+    }
     this.stadium = buildStadium(this.quality);
+    this.figures = new Figures3D(this.quality);
+    this.scene.add(this.figures.group);
     this.scene.add(this.stadium.group, ...this.stadium.lights);
     for (const l of this.stadium.lights) {
       if (l instanceof THREE.DirectionalLight) this.scene.add(l.target);
@@ -121,8 +129,9 @@ export class Stadium3DRenderer {
     this.camera.updateProjectionMatrix();
   }
 
-  /** Ein Bild zeichnen. `frame` wird ab F11 für Spieler und Ball genutzt. */
-  draw(_frame: Frame | null, now: number): void {
+  /** Ein Bild zeichnen: Spieler und Ball aus `frame` (dieselben Positionen wie in 2D). */
+  draw(frame: Frame | null, now: number, kits?: { home: KitColors; away: KitColors }): void {
+    if (frame && kits && this.figures) this.figures.update(frame, kits);
     this.renderer.render(this.scene, this.camera);
     this.frames++;
     if (this.fpsT0 === 0) this.fpsT0 = now;
@@ -145,6 +154,7 @@ export class Stadium3DRenderer {
 
   dispose(): void {
     this.stadium?.dispose();
+    this.figures?.dispose();
     this.renderer.dispose();
   }
 }

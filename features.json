@@ -125,14 +125,15 @@
       "id": "F11",
       "phase": 2,
       "titel": "3D-Platzhalterfiguren und Ball aus positions.ts",
-      "status": "todo",
+      "status": "done",
       "depends": [
         "F10"
       ],
       "abnahme": [
         "Gleiche Positionen wie 2D",
         "Ballflug mit Höhe"
-      ]
+      ],
+      "notiz": "02.11.2026: umgesetzt (PR claude/3d-figuren, baut auf PR claude/3d-stadion auf). Positionen und Ballhöhe per Test gegen die 2D-Synthese geprüft."
     },
     {
       "id": "F12",

@@ -157,7 +157,7 @@ export class ViewerApp {
     for (const v of ['2d', '3d'] as const) {
       const b = h(
         'button',
-        { type: 'button', 'aria-pressed': 'false', title: v === '2d' ? 'Draufsicht' : 'Stadion in 3D (Vorschau, noch ohne Spieler)', onclick: () => this.setView(v) },
+        { type: 'button', 'aria-pressed': 'false', title: v === '2d' ? 'Draufsicht' : 'Stadion in 3D (Vorschau mit einfachen Figuren)', onclick: () => this.setView(v) },
         v === '2d' ? '2D' : '3D',
       );
       this.viewBtns.push(b);
@@ -501,7 +501,7 @@ export class ViewerApp {
     this.dirty = false;
     const frame = m.synth.frameAt(this.tau);
     if (this.view === '3d' && this.r3d) {
-      this.r3d.draw(frame, now);
+      this.r3d.draw(frame, now, m.kits);
       const fps = this.r3d.fps();
       if (fps !== this.lastFpsShown && fps > 0) {
         this.lastFpsShown = fps;
