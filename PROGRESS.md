@@ -141,3 +141,25 @@ Testteams (0.2.0): Tore 2,54, Schüsse 11,1 / 9,7, aufs Tor 4,2 / 3,6, Ecken 5,8
 - Noch keine Spieler und kein Ball in 3D (F11), Kamera steht still (F12). Tore liegen in der Querformat-Totale knapp außerhalb des Bildes.
 - Tribünen sind leer (Zuschauer: F30), Sitzreihen nur als Textur, keine Nachbearbeitung (Bloom/Glanz der Flutlichter).
 - Engine unverändert (ENGINE_VERSION bleibt), Kalibrierung grün.
+
+## 02.11.2026 – F11: 3D-Platzhalterfiguren und Ball
+
+### Auswahl
+- FEEDBACK.md: keine neuen Punkte; die offenen Punkte (exakte Aufstellungen, 3D-TV-Look, Trainer am Rand) sind Langfristziele, die über F03/F10–F14 laufen.
+- F04, F05, F10 sind durch offene PRs (#1, #3, #2) abgedeckt; F06/F07/F41 hängen an F05. F11 ist der nächste Schritt nach F10 und baut **auf dem Branch `claude/3d-stadion` (PR #2) auf** – PR #2 zuerst zusammenführen.
+
+### Umfang
+- `src/viewer3d/figures.ts`: `Figures3D` – je Körperteil ein `InstancedMesh` (Hose/Beine in Zweitfarbe, Trikot in Hauptfarbe, Kopf neutral; Torhüter komplett in `gkPrimary`), max. 30 Figuren. Positionen ausschließlich aus `Frame` (`toWorld`: X = x − 52,5, Z = y − 34, Y = Höhe), also exakt dieselben Anzeige-Koordinaten wie in 2D inkl. Seitenwechsel. Farben nur bei Wechsel von Trikots/Spielerreihenfolge neu gesetzt.
+- Ball: Kugel (Darstellungsradius 0,2 m statt 0,11 m, sonst aus der Totalen ≈ 2 px), Höhe = `frame.ball.z` + Radius, Bodenschatten wird mit der Flughöhe kleiner und blasser.
+- Schatten: „Hoch“ echte Schatten der Figuren und des Balls; „Niedrig“ weiche Boden-Flecken (eine Instanz-Ebene, Datentextur).
+- `renderer3d.ts`: Figuren werden mit dem Stadion (neu) gebaut, `draw(frame, now, kits)`. `app.ts` übergibt die Trikotfarben (inkl. Ausweichtrikot bei Bayern gegen Bayern).
+- Tests (`tests/viewer3d.test.ts`, +6, mit echter Engine): Umrechnung umkehrbar, Figuren exakt an den 2D-Positionen (beide Stufen, 6 Zeitpunkte), Ball folgt Position und Höhe über das ganze Spiel (hohe Bälle > 2 m kommen vor), Trikot-/Torwartfarben, Draw Calls ≤ 22.
+
+### Messwerte
+- Draw Calls Szene: 14 Stadion + 5 Figuren/Ball („Hoch“) bzw. 6 („Niedrig“). `dist-single/index.html` ≈ 761 kB (200 kB gzip).
+- Screenshots per Playwright (Software-Rendering): `docs/vorschau/3d-figuren-laptop.png`, `3d-figuren-handy.png`; keine Skriptfehler (nur Google-Font offline). Bildrate mit Software-Rendering nicht aussagekräftig (7 bzw. 46 Bilder/s).
+- Engine unverändert, ENGINE_VERSION bleibt; alle 70 Tests grün.
+
+### Bekannte Schwächen / nächste Schritte
+- Kamera steht still (F12); Figuren aus der Totalen klein (≈ 18 px hoch auf 1280 px Breite), keine Rückennummern, keine Blickrichtung/Laufanimation (F20).
+- Kein Namensschild/Markierung am Ballführenden in 3D (in 2D vorhanden) – Frage an Andreas im PR.

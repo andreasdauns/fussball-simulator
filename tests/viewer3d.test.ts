@@ -11,6 +11,11 @@ import {
   pitchLineTriangles,
 } from '../src/viewer3d/geometry';
 import { buildStadium, countDrawCalls } from '../src/viewer3d/stadium';
+import { simulateMatch } from '../src/engine';
+import { DEMO_RED, DEMO_WHITE } from '../src/viewer2d/demoTeams';
+import { PositionSynth } from '../src/viewer2d/positions';
+import { BALL_RADIUS, Figures3D, figureColors, fromWorld, MAX_FIGURES, toWorld } from '../src/viewer3d/figures';
+import { resolveKits } from '../src/ui/kits';
 
 describe('3D-Geometrie (F10)', () => {
   it('Linien liegen innerhalb des Feldes und sind symmetrisch', () => {
@@ -145,5 +150,88 @@ describe('Stadion-Szene (F10)', () => {
     }
     expect(backMax).toBeGreaterThan(frontMax + 5);
     s.dispose();
+  });
+});
+
+// ─────────────────────────── F11: Figuren und Ball ───────────────────────────
+describe('3D-Figuren und Ball (F11)', () => {
+  const result = simulateMatch(DEMO_RED, DEMO_WHITE, 7);
+  const synth = new PositionSynth(result);
+  const k = resolveKits(result.home, result.away);
+  const kits = { home: k.home, away: k.away };
+  const end = synth.timeline.endTau;
+  const times = [0, 31.4, end * 0.2, end * 0.5 + 3, end * 0.75, end - 2];
+
+  it('Umrechnung Feld ↔ Welt ist exakt umkehrbar, Anstoßpunkt = Ursprung', () => {
+    const c = toWorld(52.5, 34, 0);
+    expect(c.X).toBe(0);
+    expect(c.Z).toBe(0);
+    const w = toWorld(10, 60, 3);
+    expect(w.Y).toBe(3);
+    const back = fromWorld(w.X, w.Z);
+    expect(back.x).toBeCloseTo(10, 10);
+    expect(back.y).toBeCloseTo(60, 10);
+  });
+
+  it.each(['high', 'low'] as const)('zeigt Spieler exakt an den 2D-Positionen (%s)', (q) => {
+    const f = new Figures3D(q);
+    for (const t of times) {
+      const frame = synth.frameAt(t);
+      f.update(frame, kits);
+      expect(f.shownCount()).toBe(Math.min(frame.players.length, MAX_FIGURES));
+      expect(f.shownCount()).toBeGreaterThanOrEqual(20);
+      frame.players.forEach((p, i) => {
+        const pos = f.instancePosition(i);
+        const back = fromWorld(pos.x, pos.z);
+        expect(back.x).toBeCloseTo(p.x, 5);
+        expect(back.y).toBeCloseTo(p.y, 5);
+        expect(pos.y).toBe(0);
+      });
+    }
+    f.dispose();
+  });
+
+  it('Ball folgt Position und Flughöhe aus der Positions-Synthese', () => {
+    const f = new Figures3D('low');
+    let maxZ = 0;
+    // ganzes Spiel in 2-s-Schritten: Ball nie im Boden, Höhe = z + Radius
+    for (let t = 0; t < end; t += 2) {
+      const frame = synth.frameAt(t);
+      f.update(frame, kits);
+      const back = fromWorld(f.ball.position.x, f.ball.position.z);
+      expect(back.x).toBeCloseTo(frame.ball.x, 5);
+      expect(back.y).toBeCloseTo(frame.ball.y, 5);
+      expect(f.ball.position.y).toBeCloseTo(frame.ball.z + BALL_RADIUS, 5);
+      maxZ = Math.max(maxZ, frame.ball.z);
+    }
+    expect(maxZ).toBeGreaterThan(2); // hohe Bälle kommen vor und fliegen sichtbar
+    f.dispose();
+  });
+
+  it('färbt Trikots nach Mannschaft, Torhüter in Torwartfarbe', () => {
+    const f = new Figures3D('high');
+    const frame = synth.frameAt(end * 0.3);
+    f.update(frame, kits);
+    frame.players.forEach((p, i) => {
+      const kit = p.side === 'home' ? kits.home : kits.away;
+      const want = figureColors(kit, p.isGK).shirt.toLowerCase();
+      expect(f.instanceShirt(i)).toBe(new THREE.Color(want)
+        .getHexString()
+        .padStart(7, '#'));
+    });
+    f.dispose();
+  });
+
+  it('bleibt bei wenigen Draw Calls (Szene mit Figuren ≤ 22)', () => {
+    for (const q of ['high', 'low'] as const) {
+      const scene = new THREE.Scene();
+      const s = buildStadium(q);
+      const f = new Figures3D(q);
+      f.update(synth.frameAt(100), kits);
+      scene.add(s.group, f.group);
+      expect(countDrawCalls(scene)).toBeLessThanOrEqual(22);
+      s.dispose();
+      f.dispose();
+    }
   });
 });

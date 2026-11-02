@@ -1,5 +1,8 @@
 # Was ist neu? (für Andreas)
 
+## 02.11.2026
+- In der 3D-Ansicht laufen jetzt die Spieler als einfache Figuren in Trikotfarben über den Rasen, die Torhüter in ihrer eigenen Farbe. Der Ball fliegt bei hohen Pässen sichtbar durch die Luft und wirft einen Schatten. Die Kamera steht noch still – das Mitschwenken kommt als Nächstes.
+
 ## 01.11.2026
 - Erster Blick ins 3D-Stadion: Unter dem Spielfeld gibt es jetzt den Schalter „2D / 3D“. In 3D siehst du Rasen mit Mähstreifen, Tore mit Netz, Tribünen und Flutlichtmasten aus der Sicht der TV-Kamera – die Spieler kommen im nächsten Schritt.
 - Mit „Hoch / Niedrig“ wählst du die Bildqualität (Niedrig fürs Handy); unten links steht, wie flüssig das Bild läuft.
