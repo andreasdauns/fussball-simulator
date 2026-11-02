@@ -70,7 +70,8 @@
       "id": "F05",
       "phase": 1,
       "titel": "Bayern-Spielerstamm 1950–heute (Signale + Werte)",
-      "status": "todo",
+      "status": "in_arbeit",
+      "fortschritt": "02.11.2026: Grundgerüst fertig (register.json, Typen, Pflegeskript mit CSV-Import, Tests; 41 Spieler aus den zwei TeamSheets). Offen: Jahre/Einsätze aller Spieler 1950–heute (Datenquelle in der Cloud-Umgebung gesperrt, siehe PR), kicker-Zuordnung (rechtliche Frage an Andreas), Werte für Kernspieler.",
       "depends": [
         "F03"
       ],

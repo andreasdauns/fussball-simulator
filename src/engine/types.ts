@@ -163,6 +163,42 @@ export interface TeamSheet {
   notes?: string;
 }
 
+/**
+ * Eintrag im Bayern-Spielerstamm (src/data/players/register.json).
+ * Eine Zeile pro Person über alle Epochen; die Werte einer bestimmten Saison stehen im TeamSheet.
+ * Unbekannte Fakten bleiben `null` – nie aus dem Gedächtnis auffüllen (Skill player-rating-rubric).
+ */
+export interface RegisterSeason {
+  season: string; // "2000/01"
+  teamSheet: string; // ID des TeamSheets, z. B. "bayern-2001"
+  overall: number; // Gesamtwert in dieser Saison (Kopie aus dem TeamSheet)
+  confidence: Player['confidence'];
+}
+
+export interface RegisterEntry {
+  id: string; // Slug, identisch mit Player.id in allen TeamSheets
+  name: string;
+  shortName: string;
+  positions: Position[]; // Hauptposition zuerst (über die Bayern-Zeit)
+  /** Jahr des ersten und letzten Pflichtspiels für Bayern; null = noch nicht erfasst */
+  bayernFrom: number | null;
+  bayernTo: number | null;
+  /** Ligaspiele/-tore für Bayern (Oberliga Süd bis 1963, danach Regionalliga/Bundesliga); null = noch nicht erfasst */
+  leagueApps: number | null;
+  leagueGoals: number | null;
+  /** Saisons, in denen der Spieler in einem TeamSheet bewertet ist */
+  seasons: RegisterSeason[];
+  /** "vollständig" erst, wenn Jahre und Einsätze mit Quelle erfasst sind */
+  status: 'vollständig' | 'unvollständig';
+  sources: string[];
+}
+
+export interface PlayerRegister {
+  hinweis: string;
+  stand: string; // ISO-Datum der letzten Änderung
+  players: RegisterEntry[];
+}
+
 export type EventType =
   | 'kickoff'
   | 'pass'
